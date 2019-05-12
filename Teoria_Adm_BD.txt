@@ -1,0 +1,815 @@
+S.O asigna dos tipos de memoria: Publico, Privada
+
+Zoom a la BD: (2 partes de la BD)
+
+Memoria (Se le conoce como Instancia) (SID)    -> Memoria=Instancia=SID
+SGA: La memoria compartida: 1000 sesiones solo se crea una SGA
+Buffer Cache: Los registros los guarda el Buffer cache, si se hace una consulta igual el buffer cache devuelve la información más rápido.
+Redo log buffer: Es un pool de memoria que permite la recuperación de la BD. Guarda las sentencias DML (insert,delete,update,merge), DDL (alter,create,drop), DCL (grant, revoke).
+Large pool (9i): Tareas de backup, restore, si utilizo Rman se utiliza el large pool, Paralelismo, XA (Es una transacción que sirve para poder hacer transacciones(operaciones)).
+Se usa paralelismo cuando se utilizan tablas particionada, no abusar el número de paralelismo (hilos), Fórmula =>  #coresx2 para colocar en el paralelismo.
+Todos los DDL vienen con COMMIT implícito.
+Java pool: Sirve para instanciar objetos java, se usa para java procedures.
+Keep pool: Todo lo mantiene en memoria, al apagar se pierde la información.
+Recycle pool: Deshacer tablas grandes poco usadas.
+Stream pool: Es la memoria que es utilizada para colas de java
+Shared Pool: 
+Library cache: (Guarda cómo lo resuelve) Plan de ejecución y el código de la consulta se envían al library cache. Si no existe, lo manda al buffer cache, si tampoco encuentra hace un PhysicalRits.
+Data dictionary: No se puede editar, predefinido, guarda la metadata y las vistas que tiene disponible. Todas las vistas que comienzan con ‘V$’ se guardarán en el data dictionary.
+ASH: Cada segundo graba métricas de las sesiones activas, cantidad de Hardparse, softparse, fisicalread utilizados, etc. La información del ASH se guarda en Físico. Sirve para ayudar a los DBAs para problemas futuros.
+Result Cache:  No entra funciones como input que me genera diferentes valores ,No está habilitado, se hace manual, guarda resultados de funciones (SELECT /*+ RESULT_CACHE*/ SUM(SALARY) FROM HR.EMPLOYEES)
+SQL: 
+PLSQL:
+
+
+
+PGA: La memoria privada, sirve para que una sesión de BD se conecte y cuando comienza a escribir, solo lo que el escriba él la podrá leer y modificar, se le asigna un tamaño. La memoria PGA se divide
+User information: Información del usuario
+SQL Area: Las variables declaradas en PLSQL, cursores (	‘Cursor c is’ ), 
+Workarea: Operaciones de join, algoritmos de ordenamiento, índices, order by, distinct, minus, unión, rank
+
+Físico (Base de datos) Nombre de la BD
+DataFile (Visualizable porque son archivos): Son todos los archivos con extensión ’dbf’ que contiene la información (ejemplo: Creo 100 tablas, las 100 se guardan en un DataFile fisicamente, hago un insert, la fila se guarda en un DataFile). Del buffer cache que guarda insert commit, en algún momento, la información pasa del buffer cache al DataFiles.
+TempFile(También con extensión ‘dbf’):Tablas temporales, del Workarea hace un swap al TempFile, ya que el Workarea no tiene suficiente espacio.
+Redo Log File (Extension .log): Sirve para recuperación de la BD, graba las operaciones DML, DDL, DCL. El Redo Log file es el histórico del Redo Log.
+Control File (Extension .ctl): Guarda la estructura completa de la BD, sabe la ubicación y nombre del Data File TempFile y Redo Log File, guarda toda la estructura de la parte física, guarda el nombre de la base de datos. Proteger al máximo el Control File ya que ayuda para la recuperación. Se recomienda tener una copa del Control File, es el corazón de la parte física.
+Parameter File (Extension .ora): Guarda los parámetros de la instancia, cuanto ocupa el SGA, PGA, etc, guarda todas las propiedades de la Instancia.
+Trace Files: Archivos temporales propios del sistema que pueden ser depurados, no tienen importancia.
+
+Background process: Más conocidos como demonios, permite la convivencia de lo que vive en la memoria y la parte física, la comunicación de las capas es gracias al background process. 
+
+--------Recomendación Riccio-----------------------------------
+100% DE MEMORIA → 
+
+20% SISTEMA OPERATIVO
+80% INSTANCIA
+----------------------------------------------------------
+
+PL/SQL utiliza PGA
+
+Cursores implícitos (Cuando se hace un SELECT se crea un cursor implícitamente), cursores plícitos (creados en PLSQL).
+
+Physical Read (lectura disco): Cuando no encuentra información
+Logical Read: Cuando si encuentra información.
+
+Hard Parse: Cuando no está en el library cache y piensa de cero el plan de ejecución.
+Soft Parse: Cuando se encuentra en el library cache y elige un plan de ejecución ya utilizado.
+
+Algoritmo RU: Elimina los bloques de memoria que son menos utilizados para generar espacio al Buffer Cache, memoria SGA 
+
+El índice es una tabla, tiene la información ordenada por una columna, por eso esta en el workarea.
+
+Casa sesión que se conecta a la BD se crea los 3: user information, SQL área y workarea.
+
+Recycle pool: Para querys grandes
+
+Full Scan: Recorre toda la tabla
+
+
+
+Oracle Linux: Red hat
+Swap: Es disco duro que funciona como extensión de la memoria, swap esta en disco, es una partición.
+
+Comandos Linux para particionar memoria, ver memoria
+bgdisplay: Ver la torta
+lvdisplay: Para ver los pedazos de la torta
+free -m: Para ver cuánta memoria tiene asignada la memoria virtual, memoria asignada para la paginación.
+df - h: 
+ASM: Formato de Oracle para formatear los discos, bd que corre en una ASM es óptimo.
+OMF: Crea los nombres respecto al patron de OFA
+FRA: Fast recovery area, Se almacena los backups
+
+TRANSACCIONAL             → 2, muchas filas, evita bloqueos, modelo estrella
+DATA WAREHOUSE	→ 32, pocas filas
+
+Data block: Unidad mínima de Oracle, almacena registros, 8KB
+
+SYS:
+SYSTEM: No puede apagar la BD (bajar servicios), no puede eliminar una base de datos, y tampoco puede crear una base de datos. 
+
+
+
+
+OFA: Arquitectura flexible, estándar de nomenclatura.
+Cuando la memoria real está llena se va apoyando de la swap, pero cuando utiliza swap disminuye el rendimiento.
+Para instalar oracle se recomienda hacer en dos partes:
+1.  Instalar el software: Debe instalarse en un punto de montaje independiente
+2.  Crear la BD:
+
+
+
+
+
+
+
+
+Instalación gráfica:
+instalación desatendida: Crear un archivo de configuración
+
+
+Putty: 132.68.1.20
+Interfaz grafica: 132.68.1.20:1
+
+su - oracle: Cambiar de usuario
+vncserver: No se
+whoami: Saber el nombre del usuario
+
+vncpasswd: Cambiar contraseña, poner no
+vncserver -kill:2 -> Matar la sesión
+-p: Crea todos los directorios
+
+
+cd /u01
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+oinstall: No puede hacer nada a la BD
+dba: Cualquier usuario de linux que pertenezca a dba tiene privilegios ilimitados
+oper: Trabajos de mantenimiento
+
+
+
+
+
+
+Oracle base: / Es la ruta padre donde se instala Oracle / Solo existe un oracle base a pesar de tener muchas BDs
+Oracle home: Por cada producto instalado / Ruta final donde estará un producto de oracle.
+
+Cada producto tiene Oracle Home, sin importar la cantidad de productos solo existe un Oracle Base.
+
+En un oracle home se puede instalar varias Bases de datos
+
+
+
+
+Se inicia la VM, se entra a la version 7, luego entrar al putty, IP: 132.68.1.20
+
+
+
+BD: INSTANCIAS(SID)(RAM), FISICA(DISCO)
+
+RESUMEN
+
+
+
+
+
+
+
+
+
+
+INSTANCIA
+SGA(Público):
+Buffer cache: 
+Shared Pool
+Result Cache: Sentencia explicita, 
+Library cache
+Data dictionary
+ASH
+Redo log
+Large Pool
+PGA(Privado)
+UI
+Private SQL Area: Variables locales, por ejemplo el declare en PLSQL
+Work Area: Todo lo que genera ordenamiento
+FISICA
+
+
+
+
+GOLDEN GATE 12C: Migracion, updates
+ACTIVE DATAGUARD: Replicar el 100% de la BD
+RAC / RAC ONE NODE
+ORACLE FAILSAFE
+
+
+
+
+
+
+
+
+
+SEMANA_2 SABADO *****************************************************
+
+Los índices se guardan físicamente en el Datafile
+ 
+Costo máximo 300, si es mejor 300 es aceptable, si el costo es mayor a 300 es un query malo.
+ 
+Buffer cache: RU
+Keep pool: Todo lo mantiene en memoria, hasta 1gb, 1gb/8kb datablocks entran, hasta hacer shutdown immediate, tablas muy utilizadas y pequeñas deben entrar el keep pool.
+Recycle pool: Mandar tablas grandes pero que sen poco utilizadas
+ 
+ 
+Select /*+ INDEX(IDX_PRODUCTO) */ nombre from producto;
+ 
+ 
+DEMONIOS DE LA BASE DE DATOS: Permiten la comunicación de la instancia y la parte física
+
+PMON (demonio importante): Registrar dinámicamente el servicio de una BD al LISTENER por defecto, (registro dinámico).
+
+SMON: (SYSTEM MONITOR): Instance recovery, elimina las tablas temporales que no están en uso. Desecha transacciones no comiteadas.
+
+DBWR: Bajar la información del Buffer Cache y la manda al DataFile, también lo del keep pool lo pasa, escribe cuando el buffer cache está por llenarse, algoritmo RU y deshecha los bloques que no están siendo utilizados.
+
+LGWR: Sirve para recuperación: Cada 3 segundos baja la información del Redo log buffer, o cada vez que se hace commit, cuando el pool está 1/3 va ir bajando a disco, cuando se ha hecho update y ha generado 1 mega de datablocks.
+
+CKPT (CHECKPOINT): Convertir o poner la base de datos en modo CONSISTENTE. Cuando lo hace: Cuando ocurre un switch de redo log, Cada media hora (1800 segundos), cuando ocurre un checkpoint cuando hay un shutdown immediate, cuando es explicita.
+
+
+
+MMAN: Memory manager: El MMAN trabaja con la PGA. Distribuye la cantidad de memoria en la instancia.
+
+MMON (MONITOR): Captura una foto a nivel de instancia, para ver la salud de la base de datos, lo guarda en una AWR (es un conjunto de tablas). Las fotos son tomadas cada hora, son modificables, las fotos se guardan 8 dias, es decir, un DBA puede ver la data histórica por 8 dias antes, se pide un reporte de AWR, se recomienda ponerlo a 31 días en producción, para poder comparar y optimizar los tiempos de respuesta. (El AWR se deberia modificar a 31 dias en produccion)
+
+MMNL: Toma la información del ASH que esta en el SHARED POOL y lo baja al AWR (repositorio donde se guardan datos de la db, ocurre cuando el ASH esta por llenarse.
+
+RECO: DBlinks, es para poder conectarse a una tabla de otra base de datos de cualquier servidor
+ 
+Ps -ef | grep oracle
+ 
+ 
+¿SMON para que sirve principalmente?: Instance recovery
+¿PMON para que sirve principalmente?: Liberación de recursos, registro dinamico
+ 
+ 
+Mato a PMON, los demás demonios cayeron, la base de datos cayo, para recuperar poner el comando ‘startup’, el encargado de la instance recovery es el SMON, eso sucede cuando tiene una caída abrupta la base de datos.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ORACLE NETWORK: Se configura en el $ORACLE_HOME/network
+
+SERVIDOR:
+
+
+listener.ora: En este archivo está la Configuración del Listener
+
+Listener: nombre, protocolo, tcp, puerto
+
+
+
+
+
+PROTOCOLO IPC: Protocolo interprocesos
+
+
+Servicio: Es el apodo que se le pone a la instancia
+
+
+
+
+
+
+
+
+		BANCO
+
+PRDSID        FACTURACION
+
+		CONTA
+		
+
+
+		SERVICIO
+
+SEMANA 5:
+
+
+
+     0. Fase 0
+No Mount:  Parameter file, lee los parameter file → instancia creada  + background process, solo tiene información de la instancia.
+Mount: Ubica el Control File (muy importante), y se asegura que es consistente, llegó a la fase mount, conoce el SCN.
+Open: Lee todos los Data File + redo log → Levanta la BD, → tiene que coincidir el SCN(es un número que se genera por cada transacción en la BD)
+
+
+
+
+
+Parameter File: Guarda la configuración de la instancia
+PFILE: Archivo texto, para que tome efecto los cambios en el PFILE se tiene que reiniciar instancias. Está ubicado en el $ORACLE_HOME/dbs/init<nombre de la instancia.ora>, en windows en vez de ‘dbs’ es ‘databases’
+SPFILE: (Prioridad porque es online, no afecta los servicios) Archivo binario, se edita vía comandos, ⅔ de los cambios se puede hacer online, ⅓ con reinicio. Está ubicado en el $ORACLE_HOME/dbs/spfile<nombre de la instancia.ora>
+
+
+SCN (Sequence change number): Es un número, es el ID de cualquier transacciones de la base de datos.
+
+La BD es inconsistente cuando las SCN son diferentes, a menos que ocurra una fase de checkpoint.
+
+Los SCN deben coincidir al momento del MOUNT, si no cuadra, la base de datos no levanta.
+
+Si pierde el PFILE, se queda en fase cero, para estar en NO MOUNT ya lee los PFILES.
+
+
+
+
+4 Tipos de Bajada:
+
+Shutdown Normal: Esperar que todos los usuarios salgan por su propia cuenta
+Shutdown Transactional: Esperar que haga commit o rollback
+Shutdown Immediate:
+Shutdown Abort: Es igual que cortar la energía eléctrica, se baja todo, tiene que ver con RMAN
+
+
+
+Permite nuevas sesiones
+Espera sesion salida
+Hace Checkpoint
+
+
+
+
+
+
+
+
+Normal
+NO
+SI
+SI
+
+
+
+
+
+
+
+
+Transactional
+NO
+NO, pero espera sesiones con transacciones pendientes
+SI
+
+
+
+
+
+
+
+
+Immediate
+NO
+Bota a todos, responsable PMON
+SI
+
+
+
+
+
+
+
+
+Abort
+NO
+Bota a todos
+NO
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Instance Recovery:
+
+
+
+
+
+
+
+
+
+
+
+
+
+dentro de SQL>
+
+show parameter spfile → Si value aparece vacio inicio spfile utilizó PFILE, si tiene valor la instancia en la fase No mount utilizó SPFILE.
+
+
+show parameter file → Aparecen todos los parámetros con la palabra file
+
+
+show parameter processes → Ver la cantidad de memoria asignado
+
+
+
+show parameter db_block_size → 
+
+
+
+
+
+
+
+
+
+
+
+
+alter system set memory_target=1020M  → cambiar nombre de parametro
+
+en caliente se cambia scope = memory;
+
+
+
+Tipos de Scope: SPFILE, MEMORY, BOTH(*POR DEFECTO)
+
+alter system set processes=500 scope=spfile; (el cambio se hará cuando se reinicie la BD, shutdown immediate)
+
+spfile no aplica en estos momentos
+memory toma efecto en ese momento pero no lo graba en el spfile
+both hace el cambio al instante y en el spfile
+
+create pfile from spfile;
+
+
+
+
+
+Se creo el pfile → init PRDSID.ora
+
+
+
+Forzar a subir con pfile (prioridad 2)
+
+
+
+create pfile from spfile; → Se crea pfile con datos del spfile, ya que el pfile si es editable → vi initPRDSID.ora y corregir
+Arreglar el Pfile, 
+
+
+create spfile from pfile; → ya esta corregido asi que el spfile se crea del pfile y ahora levanta escuchando el spfile.
+
+
+
+
+
+
+
+
+desc v$instance; → Información correspondiente a la instancia. → Se encuentra en Data Dictionary donde se encuentran todas las vistas.
+
+
+
+ select name from v$database; → Información de la parte física
+
+
+desc v$session; → Información detallada de cada sesión de la base de datos.
+
+
+select username, terminal from v$session
+
+
+
+
+
+
+
+
+
+alter database open;
+alter database mount;
+alter database nomount;
+
+select * from dba_users; → Muestra usuarios creados, no está disponible en fase mount, si no en fase open
+SELECT TABLESPACE_NAME FROM DBA_TABLESPACES; --> Muestra todos los tablespace existentes
+
+desc dba_segments;: Devuelve todos los segmentos de la bd.
+
+select BYTES from dba_segments where segment_name = 'TEST'; : Para saber el tamaño de la tabla
+
+select file_name, bytes from dba_data_files;: Tamaño de cada Datafile
+
+select sum(bytes) from dba_data_files where tablespace_name = 'DEMO'; : El tamaño de todos los datafile del Tablespace Demo.
+
+Extent → Puede ser uniforme o Auto (ASSM), conjunto de extent forman segmentos
+
+
+
+Select name from ts$; →
+
+Data:
+sysaux: Guarda las tablas de productos no importantes.
+System: Es un tablespace donde se guardan las segmentos (tablas) internas de oracle.
+Temp: Es un tablespace que guarda segmentos temporales
+Undotbs1: 
+Users: 
+
+
+
+
+
+desc database_properties; : Vista que devuelve las propiedades de la base de datos
+
+
+number ocupa 4 bytes
+char ocupa 2000 bytes
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+SEMANA 5 SÁBADO: ALMACENAMIENTO
+
+LÓGICO
+
+Database: El conjunto de tablespace es la base de datos
+Tablespace: Los segmentos se guardan en un tablespace, un tablespace tiene varios datafiles.
+Segmento: Uno o varios extent → Un segmento es una tabla, índice
+Extent: Un extent es 8 datablocks por defecto
+Bloque Data block: Por defecto 8kb.
+
+
+FÍSICO
+
+Datafiles: Bloques del S.O (Linux=512kb)
+
+
+
+
+1 Schema: 1 Usuario + Objetos (tablas, índices, vistas, stored procedures, triggers, synonym, funciones)
+
+
+1 DATAFILE: Crece maximo 32 gb  (4 x 8) → dependiendo del tamaño del datablock, si el datablock es de 32 → (4 x 32)
+
+
+
+
+Online Redefinition: 
+
+Table → move
+Indice → rebuild
+
+
+
+Cómo maneja los Extent MANAGEMENT
+
+Dictionary: fet$, uet$ → Son tablas que guardan configuración del dictionary
+Local (LMT): Pasar de dictionary a Local se mejora de 2% a 15%
+Manual: Cada tabla maneja un arreglo (FressList, es un conjunto de datablocks)  PCT_FREE y PCT_USE
+Auto: ASSM, mejor performance que el manual
+Auto allocate: Sirve para una migración
+
+
+
+Los Tablespaces deben tener libre un 20% o 15% de espacio libre, y siempre con la opción ‘autoextend’ por recomendación.
+
+
+desc dba_free_space → Espacio libre de los datafile 
+select bytes from dba_free_space where tablespace_name = 'LOGISTICA'  ;
+
+Cuando se crea la BD ya existe un tablespace temporal llamado ‘TEMP’
+SYSTEM, SYSOUT, UNDO, USERS → Tablas ya creadas
+
+desc V$TEMPSTAT→ Métricas de los tempfile
+desc V$TEMPFILE→ Devuelve la lista de archivos que componen los tempfile
+desc V$DATAFILE; → 
+
+
+
+
+
+INVESTIGAR! tablas temporales de tipo privada, nuevo en 18c
+
+
+
+
+Cuando un usuario hace un cambio sin hacer commit aún, por ejemplo, un update, ese sesion ve el cambio, los otros usuarios o sesiones no la ven porque aun no esta commiteado, por eso las otras sesiones Oracle las desvia y las manda al UNDO, el Undo tiene el valor original, si es que se hace commit, ahora si todos los usuarios y sesiones verán el cambio
+
+El Undo sirve para lectura consistente y sirve para rollback.
+
+Creando un undo →  Se crea varios Undo, pero solo se activa uno.
+Create undo tablespace MIUNDO datafile '/u02/oradata/PRD/miundo01.dbf' size 400M;
+
+
+show parameter undo → Configuración del Undo
+alter system set undo_tablespace='MIUNDO'; → Activar el Undo
+drop tablespace UNDOTBS1 including contents and datafiles; → Borrar un tablespace
+create user UL identified by limaperu; → Crear usuario con clave ‘limaperu’  **connect ul/limaperu
+ grant dba to UL; → Asignando permisos totales al usuario ‘ULIMA’
+alter user ulima temporary tablespace MITEMP; → Asignando Default temporal MITEMP
+alter user ulima default tablespace LOGISTICA; Asignando tablespace
+flashback  table nodormir to timestamp sysdate-1/24/60*8; → Regreso 8 minutos en el pasado y veo la data que había en ese momento
+alter table nodormir disable row movement; → Cerrar el candado con disable,Retroceder en el tiempo y volver los valores los que tenía hace 8 minutos
+select * from nodormir as of timestamp sysdate-1/24/60*8; → Comando para mostrar información hace 8 minutos, no recuperar 
+flashback query → Muestra la información, no modifica
+flashback table → Modifica la tabla
+alter system set undo_retention = 3600; → Cambiar el tiempo del undo_retention en una hora, se puede recuperar al instante data de hace una hora
+flashback table nodormir to before drop; (flasback drop) → Recuperar la tabla que ha sido borrada
+ purge recyclebin; → Eliminar la papelera
+drop table nodormir2 purge; → Eliminar de esta manera ya no es recuperable la tabla
+show parameter undo → El undo_management puede ser auto o manual
+alter system set temp_undo_enabled=true; (show parameter undo)
+select * from dba_blockers; → Usuarios que estan bloqueando a alguien,pero si no hay alguien bloqueado, no aparece en la vista dba_blockers
+select * from dba_waiters; → Usuarios que esperan porque otro usuario está bloqueando.
+v$lock
+v$locked_object; → Por cada bloqueo muestra que objeto está bloqueado
+ select OBJECT_ID from v$locked_object where SESSION_ID = 95; → Visualiza que objetos está bloqueando el usuario de código 95
+select owner, object_name, object_type from dba_objects where object_id=72680; → Devuelve que tabla está siendo bloqueada
+v$sql_area
+desc v$sql → Devuelve todos los querys que están en el library cache
+alter system kill session '1,64264' immediate; → Matar una sesión (SID, SERIAL#)
+
+dba_blockers → Sacas el SID del bloqueador
+
+
+
+
+
+
+
+
+Segmentos
+tablas
+indices
+undo
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+SÁBADO SEMANA 6:
+
+Deadlog
+
+
+
+
+
+
+Bloqueo de una fila → DML (insert, update, update merge)
+Bloqueo de una tabla -> DDL (create, delete, etc)
+Siempre se va a poder hacer SELECT a pesar de que exista bloqueo o de fila o de tabla
+Delete from es un bloqueo al nivel de filas, todas las filas
+Crear indice genera un bloqueo
+Create index online → Para crear índices en caliente (en producción)
+lock table EMP in exclusive mode;--> Bloquear la tabla a propósito, existen 5 modos de bloqueo, el exclusive es el más agresivo → Hacer un commit libera el bloqueo exclusivo.
+show parameter ddl → ddl_lock_timeout →  alter system set ddl_lock_timeout=3600; → Sirve para que no espere toda la vida un bloqueo DDL, se le ha puesto una espera máxima de 1 hora.
+SID  + SERIAL NUMBER → Reconocer un usuario
+
+
+ESTRUCTURA DE UN DATABLOCK (8KB)
+
+90%
+10% libre (PCT_FREE) → Deja esto libre para los update, si estos updates superan este 10% de espacio libre, Oracle hace un row migration
+Si se llena el datablock, Oracle migrará a otro lado la fila a ingresar
+row migration (se dan por update) = block chaining (se dan por insert)
+metadata = overhead
+1 transacción para data, 2 transacciones para índice en un datablock
+rowid = block id + datafile id → Para identificar una fila
+Hacer una búsqueda con rowid es rapidisimo.
+select rowid, id, nombre from emp;
+Big Tablespace -------> soporta 1 datafile (llega a 32 TB) A partir de Oracle10g
+Small Tablespace --------> soporta varios datafile (8kb - 32gb) 
+create bigfile tablespace INFO datafile '/u02/oradata/PRD/info01.dbf' size 200M;
+alter database set default bigfile tablespace;
+alter database default tablespace INFO; Se ha definido como default el tablespace INFO, si se crean nuevas tablas irán al tablespace INFO
+alter table default temporary tablespace MITEMP; Tablespace temporal por defecto.
+alter tablespace INFO read only; → Todo lo que está dentro del Tablespace INFO no es modificable, solo está en modo lectura, sólo permite SELECT
+alter tablespace INFO read write; → Volver el tablespace modificable
+Cada vez que se hace modificaciones a tablespaces el CHECKPOINT entra en acción.
+alter tablespace INFO offline; Ni Select se podrá hacer
+alter tablespace INFO online; Volver al estado anterior
+show parameter db_create_file_dest
+alter system set db_create_file_dest='/u02/oradata'; → Definir ruta por default de los tablespace
+create tablespace ULIMA; → Se crea un tablespace, pero ahora que la ruta por default está definida, solo se crea el tablespace
+
+(OMF) Nace en el 9i → ASM (Manejador de archivos de Oracle)
+Redo logs
+Fast Recovery Area (FRA) 
+select file_name,  bytes/1024/1024 from dba_data_files where tablespace_name = 'ULIMA';
+
+show parameter db_block_size → Ver el tamaño del datablock
+show parameter cache →  db_16k_cache_size                    big integer 0
+db_2k_cache_size                     big integer 0
+db_32k_cache_size                    big integer 0
+db_4k_cache_size                     big integer 0
+db_8k_cache_size                     big integer 0
+
+alter system set db_32k_cache_size =150M; → Elegir el tamaño DEL BUFFER CACHE DE 32KB para así crear un tablespace de 32kb
+create tablespace NODORMIR datafile ‘/u02/oradata/PD/nodormir.dbf’ size 100M blocksize 32k; → Se habilitó el tablespace de 32kb
+select name from v$datafile; → Información de los datafile
+
+
+
+COMPRESIÓN:
+Batch, carga masiva → gratis       (1-4x) Comprime hasta 4 veces menos
+OLTP (Advance Compresión) DML → (-2x) Comprime hasta 2 veces
+Insert /*+ Append*/
+Sqlloader
+create table clase (cod number, nombre varchar(20)) compress for oltp; → Comprime por oltp
+alter table clase compress basic; → Comprime por batch
+Cuando se comprime se eleva el CPU, oracle asegura que el overhead al comprimir no sea mayor a +5%
+Append
+Cuando se hace un insert, etc se va al Undo, el redo log hace lo contrario al Undo
+
+ insert /*+ APPEND */ into clase select rownum, to_char(rownum) from dba_tables; Direct Path → Se salta el Buffer cache y se va directo al Datafile con el Append, el append baja 50% de tu batch ya que se va directo a disco
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
