@@ -24,6 +24,10 @@
 
 - **SFILE:** Es un archivo binario, es prioridad porque es Online, ⅔ de los cambios del SFILE se puede hacer Online
 
+- **Big Tablespace:** Soporta 1 datafile
+
+- **Small Tablespace:** Soporta varios datafile
+
 
 
 ## Demonios de la Base de datos (Background Process)
@@ -142,7 +146,13 @@
 
 - lock table EMP in exclusive mode: Bloquea la tabla a proposito, existen 5 tipos de bloqueo
 
-- alter system set ddl
+- alter system set ddl_lock_tiemout=3600: Se configura el tiempo de espera de un bloqueo DDL, 1 hora de espera
+
+- PCT_FREE: El datablock deja el 10% libre para los updates, si queda menos del 10% Oracle hace un row migration, block chaining se da por insert
+
+- create bigfile tablespace INFO datafile '/u02/oradata/PRD/info01.dbf size 200M: Creacion de tablespace
+
+- 
 
 
 
