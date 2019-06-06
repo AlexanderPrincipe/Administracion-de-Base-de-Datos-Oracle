@@ -6,7 +6,7 @@
 
 ## Conceptos
 
-_**OFA:** Estandar de nomenclaturas de Oracle_
+- **OFA:** Estandar de nomenclaturas de Oracle
 
 _**Algoritmo RU:** Elimina los bloques de memoria que son menos utilizados para generar espacio al Buffer Cache_
 
