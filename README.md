@@ -123,16 +123,7 @@
 
 - desc **v$dispatchers:** Muestra informacion de los dispatchers
 
-- desc **v$shared_server: **
-
-- 
-
-
-
-
-
-
-
+- desc **v$shared_server:**
 
 
 ## Comandos
