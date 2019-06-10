@@ -1,7 +1,6 @@
 # Administracion-de-base-de-datos
 
-### Comandos de Base de Datos Oracle para su administracion
-
+### Comandos de Administracion de Base de Datos Oracle 
 
 
 ## Conceptos
