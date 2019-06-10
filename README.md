@@ -168,17 +168,17 @@
 
 - **alter table default temporary tablespace MITEMP:** Definir tablespace temporal por defecto
 
-- **alter tablespace INFO read only: Todo lo que esta dentro del tablespace INFO esta solo para lectura
+- **alter tablespace INFO read only:** Todo lo que esta dentro del tablespace INFO esta solo para lectura
 
-- **alter tablespace INFO read write: Todo lo que esta dentro del tablespace INFO es modificable
+- **alter tablespace INFO read write:** Todo lo que esta dentro del tablespace INFO es modificable
 
-- **alter tablespace INFO offline: No se podra hacer ni un Select
+- **alter tablespace INFO offline:** No se podra hacer ni un Select
 
-- **alter tablespace INFO online: Tablespace activa
+- **alter tablespace INFO online:** Tablespace activa
 
-- **alter system set db_create_file_dest='/u02/oradata': Definir ruta por default de los tablespace
+- **alter system set db_create_file_dest='/u02/oradata':** Definir ruta por default de los tablespace
 
-- **create tablespace ULIMA: Se crea un tablespace sin definir la ruta, se tomara la ruta por defecto
+- **create tablespace ULIMA:** Se crea un tablespace sin definir la ruta, se tomara la ruta por defecto
 
 -  **COMPRESION:**
 
