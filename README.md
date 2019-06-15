@@ -235,7 +235,7 @@
 
 - **show patameter ddl:**
 
-- **show parameter shared_server:**
+- **show parameter shared_server:** 
 
 
 
