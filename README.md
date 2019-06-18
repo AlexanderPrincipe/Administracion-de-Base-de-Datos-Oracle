@@ -206,7 +206,7 @@
 
 - **alter table PRODUCTO disable row movement:** Cerrar las filas
 
-- ************************************************************
+
 
 - **alter session enable resumable timeout 3600:** Si en una hora no se soluciona, da error, se quedaron sin espacio por la carga masiva
 
