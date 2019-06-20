@@ -226,6 +226,22 @@
 
 - **select NAME, BUSY/(IDLE+BUSY) from v$shared_server:** Muestra el porcentaje de utilizacion
 
+-  **SEGURIDAD:**
+
+- create user examen identified by jalado: Crear usuario 'examen' con contraseña 'jalado'
+
+- alter user examen indentified by masjalado: Cambiar contraseña
+
+- alter user examen account lock: Bloquea al usuario examen, no se puede conectar
+
+- alter system kill session
+
+- alter user examen default tablespace USERS: Configurar el tablespace por default 
+
+-  **AUTENTICACION:**
+
+
+
 
 
 
