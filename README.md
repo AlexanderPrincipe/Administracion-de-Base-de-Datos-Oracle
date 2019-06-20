@@ -36,6 +36,7 @@
 - **Para conectarse en modo compartido se tiene que modificar el tnsnames.ora:** cd $ORACLE_HOME/network/admin/  vi tnsnames.ora
 (SERVER = SHARED)
 
+- Al crear la tabla Oracle la crea de manera diferida, recien cuando se hace el primer insert la tabla se crea, ya que Oracle no reserva espacio cuando no tiene datos la tabla 
 
 
 ## Demonios de la Base de datos (Background Process)
@@ -123,6 +124,19 @@
 
 - desc **v$shared_server:**
 
+- desc v$fixed_table: Muestra vistas dinamicas
+
+- dictionary: Muestra DBA y v$
+
+- desc dba_views: Muestra vista del negocio
+
+- desc dba_tab_privs: Devuelve los privilegios de objetos otorgados
+
+- desc sys.adu$: Vista que guarda todo el track de auditoria
+
+- desc dba_synonyms: Muestra todos los sinonimos creados
+
+
 
 ## Comandos
 
@@ -178,7 +192,7 @@
 
 - **create tablespace ULIMA:** Se crea un tablespace sin definir la ruta, se tomara la ruta por defecto
 
--  **COMPRESION:**
+## Compresion
 
 - **Compresion bacth:** Comprime hasta 4 veces el tamaño 
 
@@ -188,7 +202,7 @@
 
 - **alter table CLASE compress basic:** Comprimir por batch
 
--  **DESFRAGMENTACION:**
+## Desfragmentacion
 
 - El HWM retrocede y elimina los espacios vacios de la tabla, ahora ya no recorre toda la tabla, mejora el performance
 
@@ -196,7 +210,7 @@
 
 - alter index IDX_TABLA rebuild: Reconstruir indices dañados
 
--  **PASOS DE DESFRAGMENTACION:**
+## Pasos de desfragmentacion
 
 - **alter table PRODUCTO enable row movement:** Modificar el rowid de las filas
 
@@ -226,7 +240,7 @@
 
 - **select NAME, BUSY/(IDLE+BUSY) from v$shared_server:** Muestra el porcentaje de utilizacion
 
--  **SEGURIDAD:**
+## Seguridad
 
 - create user examen identified by jalado: Crear usuario 'examen' con contraseña 'jalado'
 
@@ -234,13 +248,84 @@
 
 - alter user examen account lock: Bloquea al usuario examen, no se puede conectar
 
-- alter system kill session
+- useradd -g oinstall franco: Agregar un nuevo usuario
 
-- alter user examen default tablespace USERS: Configurar el tablespace por default 
+- create user ops$franco identified externally: Con esto el sistema operativo valida y al entrar al sqlplus no pide contraseña
 
--  **AUTENTICACION:**
+- drop user ivan cascade: Borra todas las tablas del usuario ivan
+
+## Autenticacion
+
+- Autenticacion por password: Es la autenticacion con username y password
+
+- Autenticacion externa: Te conectas con el usuario del sistema operativo, no se ingresa password
+
+- Autenticacion globarl: Huella digital, retina   Oracle 18c
 
 
+## Privelegios de sistema
+
+- lista = [select, execute, insert, all, create ...]  
+
+- for (i=0, i<lista.length,i++){
+  grant <lista[0]> on ivan.cliente to franco
+}
+
+- Grant --> select, insert, delete, execute, update, all(DML)
+
+- grant dba to ops$franco: Le asigna el rol dba al usuario franco
+
+- grant create table to Carlos: Carlos podra crear tablas
+
+- grant create triggers to Carlos: Carlos podra creat triggers
+
+- grant create any tables to Carlos: Carlos podra crear tablas sobre cualquier esquema existente
+
+- grant delete any table to Carlos: Puede borrar tablas de cualquier esquema
+
+- grant execute any procedure to Carlos: Puede ejecutar cualquier procedure, hasta los de oracle
+
+- grant select on ivan.cliente to franco: Le da permisos de select de la tabla cliente de ivan a franco
+
+- revoke select on ivan.cliente from franco: Le quita permisos se select a franco de la tabla cliente de ivan
+
+- grant execute on ivan.sp_celular to franco: Le da permisos de ejecutar en la tabla sp_celular de ivan a franco
+
+## Privelegios de Sistemas Administrativos
+
+- grant create user to Carlos: Carlos puede crear usuarios
+
+- grant drop user to Carlos: Carlos puede borrar usuarios
+
+- grant alter user to Carlos: Carlos puede modificar configuracion de usuarios
+
+- grant alter system to Carlos: Permite cambiar parametros de la base de datos
+
+- grant create tablespace to Carlos: Carlos puede crear tablespace
+
+- grant alter database tablespace to Carlos: 
+
+- revoke create user from Carlos: Carlos no puede crear usuarios
+
+- grant create session to piero: Permite que piero acceda a la BD
+
+- alter user piero quota 50M on USERS: Permite escribir hasta 50M
+
+- alter user piero quota unlimited on USERS: Permite escribir ilimitado hasta el tamaño del tablespace
+
+- select privilege from dba_sys_privs where GRANTEE='FRANCO': Ver los permisos de franco
+
+- grant create user to piero with admin option: Con el comando 'with admin option' permite que propagen el permiso
+
+- grant create user to piero with grant option: Con el comando 'with grant option'
+ 
+## Roles
+
+- create role ROL_ALUMNO: Crear rol
+
+- grant create session to ROL_ALUMNO: El rol tiene el derecho de poder conectarse
+
+- grant create table to ROL_ALUMNO: 
 
 
 
@@ -252,6 +337,12 @@
 - **show patameter ddl:**
 
 - **show parameter shared_server:** 
+
+- show parameter remote: remote_os_authent
+
+- sec_case_sensitive_logon: Alter system set sec_case_sensitive_logon = FALSE; : Para que al loguearse no importe si es mayuscula o minuscula
+
+- show parameter deferred_segment_creation: 
 
 
 
