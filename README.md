@@ -242,25 +242,25 @@
 
 ## Seguridad
 
-- create user examen identified by jalado: Crear usuario 'examen' con contraseña 'jalado'
+- **create user examen identified by jalado:** Crear usuario 'examen' con contraseña 'jalado'
 
-- alter user examen indentified by masjalado: Cambiar contraseña
+- **alter user examen indentified by masjalado:** Cambiar contraseña
 
-- alter user examen account lock: Bloquea al usuario examen, no se puede conectar
+- **alter user examen account lock:** Bloquea al usuario examen, no se puede conectar
 
-- useradd -g oinstall franco: Agregar un nuevo usuario
+- **useradd -g oinstall franco:** Agregar un nuevo usuario
 
-- create user ops$franco identified externally: Con esto el sistema operativo valida y al entrar al sqlplus no pide contraseña
+- **create user ops$franco identified externally:** Con esto el sistema operativo valida y al entrar al sqlplus no pide contraseña
 
-- drop user ivan cascade: Borra todas las tablas del usuario ivan
+- **drop user ivan cascade:** Borra todas las tablas del usuario ivan
 
 ## Autenticacion
 
-- Autenticacion por password: Es la autenticacion con username y password
+- **Autenticacion por password:** Es la autenticacion con username y password
 
-- Autenticacion externa: Te conectas con el usuario del sistema operativo, no se ingresa password
+- **Autenticacion externa:** Te conectas con el usuario del sistema operativo, no se ingresa password
 
-- Autenticacion globarl: Huella digital, retina   Oracle 18c
+- **Autenticacion globarl:** Huella digital, retina   Oracle 18c
 
 
 ## Privelegios de sistema
@@ -273,59 +273,59 @@
 
 - Grant --> select, insert, delete, execute, update, all(DML)
 
-- grant dba to ops$franco: Le asigna el rol dba al usuario franco
+- **grant dba to ops$franco:** Le asigna el rol dba al usuario franco
 
-- grant create table to Carlos: Carlos podra crear tablas
+- **grant create table to Carlos:** Carlos podra crear tablas
 
-- grant create triggers to Carlos: Carlos podra creat triggers
+- **grant create triggers to Carlos:** Carlos podra creat triggers
 
-- grant create any tables to Carlos: Carlos podra crear tablas sobre cualquier esquema existente
+- **grant create any tables to Carlos:** Carlos podra crear tablas sobre cualquier esquema existente
 
-- grant delete any table to Carlos: Puede borrar tablas de cualquier esquema
+- **grant delete any table to Carlos:** Puede borrar tablas de cualquier esquema
 
-- grant execute any procedure to Carlos: Puede ejecutar cualquier procedure, hasta los de oracle
+- **grant execute any procedure to Carlos:** Puede ejecutar cualquier procedure, hasta los de oracle
 
-- grant select on ivan.cliente to franco: Le da permisos de select de la tabla cliente de ivan a franco
+- **grant select on ivan.cliente to franco:** Le da permisos de select de la tabla cliente de ivan a franco
 
-- revoke select on ivan.cliente from franco: Le quita permisos se select a franco de la tabla cliente de ivan
+- **revoke select on ivan.cliente from franco:** Le quita permisos se select a franco de la tabla cliente de ivan
 
-- grant execute on ivan.sp_celular to franco: Le da permisos de ejecutar en la tabla sp_celular de ivan a franco
+- **grant execute on ivan.sp_celular to franco:** Le da permisos de ejecutar en la tabla sp_celular de ivan a franco
 
 ## Privelegios de Sistemas Administrativos
 
-- grant create user to Carlos: Carlos puede crear usuarios
+- **grant create user to Carlos:** Carlos puede crear usuarios
 
-- grant drop user to Carlos: Carlos puede borrar usuarios
+- **grant drop user to Carlos:** Carlos puede borrar usuarios
 
-- grant alter user to Carlos: Carlos puede modificar configuracion de usuarios
+- **grant alter user to Carlos:** Carlos puede modificar configuracion de usuarios
 
-- grant alter system to Carlos: Permite cambiar parametros de la base de datos
+- **grant alter system to Carlos:** Permite cambiar parametros de la base de datos
 
-- grant create tablespace to Carlos: Carlos puede crear tablespace
+- **grant create tablespace to Carlos:** Carlos puede crear tablespace
 
-- grant alter database tablespace to Carlos: 
+- **grant alter database tablespace to Carlos:**
 
-- revoke create user from Carlos: Carlos no puede crear usuarios
+- **revoke create user from Carlos:** Carlos no puede crear usuarios
 
-- grant create session to piero: Permite que piero acceda a la BD
+- **grant create session to piero:** Permite que piero acceda a la BD
 
-- alter user piero quota 50M on USERS: Permite escribir hasta 50M
+- **alter user piero quota 50M on USERS:** Permite escribir hasta 50M
 
-- alter user piero quota unlimited on USERS: Permite escribir ilimitado hasta el tamaño del tablespace
+- **alter user piero quota unlimited on USERS:** Permite escribir ilimitado hasta el tamaño del tablespace
 
-- select privilege from dba_sys_privs where GRANTEE='FRANCO': Ver los permisos de franco
+- **select privilege from dba_sys_privs where GRANTEE='FRANCO':** Ver los permisos de franco
 
-- grant create user to piero with admin option: Con el comando 'with admin option' permite que propagen el permiso
+- **grant create user to piero with admin option:** Con el comando 'with admin option' permite que propagen el permiso
 
-- grant create user to piero with grant option: Con el comando 'with grant option'
+- **grant create user to piero with grant option:** Con el comando 'with grant option'
  
 ## Roles
 
-- create role ROL_ALUMNO: Crear rol
+- **create role ROL_ALUMNO:** Crear rol
 
-- grant create session to ROL_ALUMNO: El rol tiene el derecho de poder conectarse
+- **grant create session to ROL_ALUMNO:** El rol tiene el derecho de poder conectarse
 
-- grant create table to ROL_ALUMNO: 
+- g**rant create table to ROL_ALUMNO:** 
 
 
 
@@ -338,11 +338,11 @@
 
 - **show parameter shared_server:** 
 
-- show parameter remote: remote_os_authent
+- **show parameter remote:** remote_os_authent
 
-- sec_case_sensitive_logon: Alter system set sec_case_sensitive_logon = FALSE; : Para que al loguearse no importe si es mayuscula o minuscula
+- **sec_case_sensitive_logon:** Alter system set sec_case_sensitive_logon = FALSE; : Para que al loguearse no importe si es mayuscula o minuscula
 
-- show parameter deferred_segment_creation: 
+- **show parameter deferred_segment_creation:**
 
 
 
