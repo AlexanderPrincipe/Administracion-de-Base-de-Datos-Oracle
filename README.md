@@ -325,7 +325,7 @@
 
 - **grant create session to ROL_ALUMNO:** El rol tiene el derecho de poder conectarse
 
-- g**rant create table to ROL_ALUMNO:** 
+- **grant create table to ROL_ALUMNO:** 
 
 
 
