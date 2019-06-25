@@ -124,17 +124,17 @@
 
 - desc **v$shared_server:**
 
-- desc v$fixed_table: Muestra vistas dinamicas
+- desc **v$fixed_table:** Muestra vistas dinamicas
 
-- dictionary: Muestra DBA y v$
+- **dictionary:** Muestra DBA y v$
 
-- desc dba_views: Muestra vista del negocio
+- desc **ba_views:** Muestra vista del negocio
 
-- desc dba_tab_privs: Devuelve los privilegios de objetos otorgados
+- desc **dba_tab_privs:** Devuelve los privilegios de objetos otorgados
 
-- desc sys.adu$: Vista que guarda todo el track de auditoria
+- desc **sys.adu$:** Vista que guarda todo el track de auditoria
 
-- desc dba_synonyms: Muestra todos los sinonimos creados
+- desc **dba_synonyms:** Muestra todos los sinonimos creados
 
 
 
