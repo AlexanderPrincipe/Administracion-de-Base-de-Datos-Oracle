@@ -343,21 +343,21 @@
 
 - **grant create table to ROL_ALUMNO:** 
 
-- grant ROL_ALUMNO to franco: Se le asigna un rol al usuario franco
+- **grant ROL_ALUMNO to franco:** Se le asigna un rol al usuario franco
 
-- create any table to ROL_PROFILE: Hereda el rol y se agrega mas opciones, 
+- **create any table to ROL_PROFILE:** Hereda el rol y se agrega mas opciones, 
 
-- drop role ROL_ALUMNO: Borra un rol
+- **drop role ROL_ALUMNO:** Borra un rol
 
-- grant RESOURCE to franco: Se le asigna el rol RESOURCE que es un rol estandar para un developer
+- **grant RESOURCE to franco:** Se le asigna el rol RESOURCE que es un rol estandar para un developer
 
-- select GRANTED_ROLE from dba_role_privs where GRANTEE='Franco': Muestra los roles que tiene asignado el usuario franco
+- **select GRANTED_ROLE from dba_role_privs where GRANTEE='Franco':** Muestra los roles que tiene asignado el usuario franco
 
-- select * from session_privs: Ver los privilegios garantizados y activado en la sesion actual
+- **select * from session_privs:** Ver los privilegios garantizados y activado en la sesion actual
 
-- create role ROL_TEST identified by miclave: Agregar una clave para tener los permisos
+- **create role ROL_TEST identified by miclave:** Agregar una clave para tener los permisos
 
-- set role ROL_TEST identified by miclave: Asignar el permiso mediante la clave
+- **set role ROL_TEST identified by miclave:** Asignar el permiso mediante la clave
 
 
 ## Profile
