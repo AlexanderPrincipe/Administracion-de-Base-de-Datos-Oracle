@@ -136,6 +136,19 @@
 
 - desc **dba_synonyms:** Muestra todos los sinonimos creados
 
+- desc dba_roles: Vista que contiene todos los roles
+
+- desc dba_tab_privs: Muestra los objetos asignados a un rol
+
+- desc dba_priv_captures: Muestra todas las politicas creadas
+
+- desc dba_used_sysprivs: Privilegios de sistema que han sido utilizados en el analisis
+
+- desc dba_unused_sysprivs: Privilegios de sistema que no han sido utilizados en el analisis
+
+- desc dba_used_objprivs: Muestra los objetos que han sido utilizados
+
+- desc v$pwfile_users: Contenido del password file
 
 
 ## Comandos
@@ -318,6 +331,9 @@
 - **grant create user to piero with admin option:** Con el comando 'with admin option' permite que propagen el permiso
 
 - **grant create user to piero with grant option:** Con el comando 'with grant option'
+
+- grant select any dictionary to ulima: Permitir entrar al diccionario de datos (entrar a vistas v$)
+
  
 ## Roles
 
@@ -326,6 +342,31 @@
 - **grant create session to ROL_ALUMNO:** El rol tiene el derecho de poder conectarse
 
 - **grant create table to ROL_ALUMNO:** 
+
+- grant ROL_ALUMNO to franco: Se le asigna un rol al usuario franco
+
+- create any table to ROL_PROFILE: Hereda el rol y se agrega mas opciones, 
+
+- drop role ROL_ALUMNO: Borra un rol
+
+- grant RESOURCE to franco: Se le asigna el rol RESOURCE que es un rol estandar para un developer
+
+- select GRANTED_ROLE from dba_role_privs where GRANTEE='Franco': Muestra los roles que tiene asignado el usuario franco
+
+- select * from session_privs: Ver los privilegios garantizados y activado en la sesion actual
+
+- create role ROL_TEST identified by miclave: Agregar una clave para tener los permisos
+
+- set role ROL_TEST identified by miclave: Asignar el permiso mediante la clave
+
+
+## Profile
+
+- alter user ULIMA profile PERFIL_ULIMA: Asignar un perfil al usuario ULIMA
+
+- sysbackup: Es un privilegio para poder sacar backup
+
+- 
 
 
 
