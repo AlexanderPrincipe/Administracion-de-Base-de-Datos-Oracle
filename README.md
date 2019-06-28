@@ -136,19 +136,19 @@
 
 - desc **dba_synonyms:** Muestra todos los sinonimos creados
 
-- desc dba_roles: Vista que contiene todos los roles
+- desc **dba_roles:** Vista que contiene todos los roles
 
-- desc dba_tab_privs: Muestra los objetos asignados a un rol
+- desc d**ba_tab_privs:** Muestra los objetos asignados a un rol
 
-- desc dba_priv_captures: Muestra todas las politicas creadas
+- desc **dba_priv_captures:** Muestra todas las politicas creadas
 
-- desc dba_used_sysprivs: Privilegios de sistema que han sido utilizados en el analisis
+- desc **dba_used_sysprivs:** Privilegios de sistema que han sido utilizados en el analisis
 
-- desc dba_unused_sysprivs: Privilegios de sistema que no han sido utilizados en el analisis
+- desc **dba_unused_sysprivs:** Privilegios de sistema que no han sido utilizados en el analisis
 
-- desc dba_used_objprivs: Muestra los objetos que han sido utilizados
+- desc **dba_used_objprivs:** Muestra los objetos que han sido utilizados
 
-- desc v$pwfile_users: Contenido del password file
+- desc **v$pwfile_users:** Contenido del password file
 
 
 ## Comandos
