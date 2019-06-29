@@ -138,7 +138,7 @@
 
 - desc **dba_roles:** Vista que contiene todos los roles
 
-- desc d**ba_tab_privs:** Muestra los objetos asignados a un rol
+- desc **dba_tab_privs:** Muestra los objetos asignados a un rol
 
 - desc **dba_priv_captures:** Muestra todas las politicas creadas
 
