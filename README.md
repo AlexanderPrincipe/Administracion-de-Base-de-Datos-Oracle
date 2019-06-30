@@ -150,6 +150,8 @@
 
 - desc **v$pwfile_users:** Contenido del password file
 
+- desc v$log: Muestra los grupos de redo log creados
+
 
 ## Comandos
 
@@ -374,6 +376,15 @@
 
 - ¿Cuando sucede un switch de redo log?: El redo log buffer baja al redo log file, sucede cada 3 segundos o por cada commit
 
+![Captura de pantalla de 2019-06-29 19-26-48](https://user-images.githubusercontent.com/31213239/60390794-366df280-9aa4-11e9-9825-918fff970a63.png)
+
+- alter system switch logfile: Forzar un switch
+
+- select GROUP#, SEQUENCE#, BYTES, STATUS from v$log: Ver cual grupo esta activo, actual e inactivo
+
+- alter database add logfile group 4 ('/u02/oradata/PRD/redo4a.log','/u02/oradata/PRD/redo4b.log') size 200M : Creacion de un nuevo miembro
+
+- 
 
 
 
