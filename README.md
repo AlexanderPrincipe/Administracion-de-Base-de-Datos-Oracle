@@ -281,7 +281,7 @@
 - lista = [select, execute, insert, all, create ...]  
 
 - for (i=0, i<lista.length,i++){
-  grant <lista[0]> on ivan.cliente to franco
+  grant <lista[i]> on ivan.cliente to franco
 }
 
 - Grant --> select, insert, delete, execute, update, all(DML)
@@ -332,7 +332,7 @@
 
 - **grant create user to piero with grant option:** Con el comando 'with grant option'
 
-- grant select any dictionary to ulima: Permitir entrar al diccionario de datos (entrar a vistas v$)
+- **grant select any dictionary to ulima:** Permitir entrar al diccionario de datos (entrar a vistas v$)
 
  
 ## Roles
@@ -366,7 +366,13 @@
 
 - sysbackup: Es un privilegio para poder sacar backup
 
-- 
+## Recuperacion
+
+- control_files='/u02/oradata/PRD/control01.ctl','/u02/oradata/PRD/control02.ctl','/u03/oradata/PRD/control103.ctl' scope=spfile: Multiplexacion
+
+- Grupos de Redo log: Inactivo --> Actual --> Activo
+
+- ¿Cuando sucede un switch de redo log?: El redo log buffer baja al redo log file, sucede cada 3 segundos o por cada commit
 
 
 
