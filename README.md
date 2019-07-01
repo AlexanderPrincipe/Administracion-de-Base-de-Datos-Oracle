@@ -150,7 +150,7 @@
 
 - desc **v$pwfile_users:** Contenido del password file
 
-- desc v$log: Muestra los grupos de redo log creados
+- desc **v$log:** Muestra los grupos de redo log creados
 
 
 ## Comandos
