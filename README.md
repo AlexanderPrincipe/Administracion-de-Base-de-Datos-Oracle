@@ -402,6 +402,69 @@
 
 - **show parameter deferred_segment_creation:**
 
+- spfile: Si este paramtero tiene un valor significa que la isntancia levanto con spfile y si no tiene valor (si sale vacio) inicio con pfile
+
+- processes: Muestra la cantidad de conexiones concurrentes, los background process cuentan como conexiones concurrentes
+
+- memory_target: En este parametro se configura la memoria de la instancia
+
+- db_block_size: En este parametro se configura el tamaño del datablock, esta expresado en bytes
+
+- audit_file_dest: En este parametro se modifica la ruta del archivo de auditoria
+
+- undo_tablespace: En este parametro se coloca el nombre del tablespace undo activo (ejemplo: alter system set undo_tablespace='MIUNDO')
+
+- undo_retention: En este parametro se configura el tipo de gestion que tendra el tablespace undo, puede ser manual o auto. Solo para tecnicas muy avanzadas de configuracion se utiliza el 'manual'
+
+- temp_undo_enabled: A partir de la version 12c sus valores son TRUE o FALSE. Si su valor es TRUE no genera redolog y permite una mejora en el uso del tablespace UNDO
+
+- ddl_lock_timeout: Se configura el tiempo de espera para una sesion en espera, manda error ORA-00054
+
+- db_create_file_dest: En este parametro se configura la ruta especifica de los datafile para OMF
+
+- db_32k_cache_size: Sirve para habilitar el buffer cache para block
+
+- dispatchers:
+
+- shared_servers: Especifica la cantidad de server process que desea crear cuando cuando se inicia una instancia. Se debe tener cuidado de no establecer SHARED_SERVERS demasiado alto al inicio del sistema
+
+- os_authent_prefix: Permite visualizar el prefijo que se le debe colocar al usuario external. Su valor es "ops$"
+
+- remote_os_authent: De la version 10g en adelante permite que un usuario external se conecte al sqlplus localmente, es decir, que debe estar en el S.O para poder conectarse y asi no puedan conectarse desde otros terminales. Debe estar en FALSE (valor por default)
+
+- sec_case_sensitive_logon: A partir de la version 11g en adelante es TRUE por default, permite case sensitive en las contraseñas
+
+- deferred_segment_creation: Su valor por default es TRUE, significa que al momento de crear la tabla, esta se crea pero no crea el segmento, es decir, Oracle crea las tablas de manera diferida, recien crea el segmento cuando se inserta el primer registro en la tabla
+
+- resource_limit: Desde la version 11g su valor por default es TRUE, significa que las politicas de recursos se aplicaran
+
+- control_files: Muestra el listado de los control file
+
+- log_buffer: Muestra cuanto ocupa el redo log buffer
+
+Son 5 canales para multiplexar los redolog, aca se configuran las rutas por default para los redolog en OMF
+
+- db_create_online_log_dest_1
+
+- db_create_online_log_dest_2
+
+- db_create_online_log_dest_3
+
+- db_create_online_log_dest_4
+
+- db_create_online_log_dest_5
+
+- fast_start_mttr_target: Parametro para configurar el tiempo de demora del instance recovery, sus valores van de 0 a 3600 segundos
+
+- log_checkpoint_timeout: Tiempo (en segundos) o rango para establecer cada cuanto ocurre un checkpoint
+
+- db_recovery_file_dest: En este parametro se configura la ruta especifica para el FRA en OMF
+
+- 
+
+
+
+
 
 
 
