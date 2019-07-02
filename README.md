@@ -390,13 +390,6 @@
 
 ## Parametros
 
-- **SHOW PARAMETER UNDO:** Configuracion del UNDO
-
-- **show patameter ddl:**
-
-- **show parameter shared_server:** 
-
-- **show parameter remote:** remote_os_authent
 
 - **sec_case_sensitive_logon:** Alter system set sec_case_sensitive_logon = FALSE; : Para que al loguearse no importe si es mayuscula o minuscula
 
@@ -460,7 +453,35 @@ Son 5 canales para multiplexar los redolog, aca se configuran las rutas por defa
 
 - db_recovery_file_dest: En este parametro se configura la ruta especifica para el FRA en OMF
 
-- 
+- db_recovery_file_dest_size: En este parametro se configura la ruta especifica para el FRA en OMF
+
+- log_archive_dest: Ruta donde manda los archivelog, se puede tener gasta 31 copias de los archivelog, 1 para el FRA y 30 para 
+
+- log_archive_format: 
+
+- log_archive_max_processes: Cantidad de procesos archive, esto depende de la cantidad de grupos en el redo
+
+- control_file_record_keep_time: Tiempo (en dias) que el control file va a mantener la informacion de los backups para que el RMAN los pueda ubicar, lo recomendable es que este en 30 dias
+
+- pga_aggregate_target: A partir de la version 9i permite poder configurar la capacidad para el PGA y este gestione de manera automatica el tamaño de sus componentes
+
+. sga_target: A partir de la version 10g permite poder configurar la capacidad para el SGA y este gestione de manera automatica el tamaño de sus componentes. No modifica los pool: redolog buffer, keep pool, recycle pool y buffer(N), aca interviene el MMAN
+
+- memory_target: A partir de la version 11g permite controlar y gestionar el tamaño del PGA y el SGA. Este parametro no es compatible con Huge Pages
+
+- db_file_multiblock_read_count: Permite traer n cantidad de datablocks en un barrido de lectura, es decir, si su valor es 89, trae 89 datablocks
+
+- db_keep_cache_size: Permite establecer el tamaño del keep pool
+
+- db_recycle_cache_size: Permite establecer el tamaño del recycle pool
+
+- filesystemio_options: Tiene 3 valores, async, none, setall (async: por lo bajo hace la grabacion de un insert pesado a disco y muestra el insert realizado al usuario, esto mejora el performance) (setall: hace escritura asincrona y bypasea el cache del filesystem (buffer cache del S.O)). Este parametro no se puede modificar en caliente (scope=spfile)
+
+- session_cached_cursors: Su valor por default es 50 a partir de la version 11g, significa que va a mantener hasta 50 cursores para que encuentre rapudo el plan de ejecucion, lo recomendable es tenerlo entre 200 a 500, para poner el parametro correcto se tiene que ver el porcentaje de utilizacion del parametro session_cached_cursors, si esta en 100% de utilizacion, se tiene que aumentar su valor
+
+- cursor_sharing: Puede tener 3 valores, EXACT, SIMILAR Y FORCE (exact: significa que se hace un plan de ejecucion por cada sentencia asi solo cambie el valor un campo, por ejemplo si en el where se busca otro id, ya es una consulta distinta), (similar: omite los literal value) (force: Mantiene un plan de ejecucion de por vida, no hay mejoras ni por estadistica). Es recomendable que la aplicacion no tenga autocommit
+
+- statistics_level: Puede tener 3 valores: BASIC, TYPICAL y ALL (basic: oracle no trabaja las estadisticas que ejecuta por lo bajo, no se podria ver el estado de la base de datos) (ALL: hace una captura excesiva a la base de datos para poder tener mayor informacion, se usa cuando no se logra encontrar un problema en el AWR y es necesario informacion mas especifica)
 
 
 
