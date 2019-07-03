@@ -395,93 +395,93 @@
 
 - **show parameter deferred_segment_creation:**
 
-- spfile: Si este paramtero tiene un valor significa que la isntancia levanto con spfile y si no tiene valor (si sale vacio) inicio con pfile
+- **spfile:** Si este paramtero tiene un valor significa que la isntancia levanto con spfile y si no tiene valor (si sale vacio) inicio con pfile
 
-- processes: Muestra la cantidad de conexiones concurrentes, los background process cuentan como conexiones concurrentes
+- **processes:** Muestra la cantidad de conexiones concurrentes, los background process cuentan como conexiones concurrentes
 
-- memory_target: En este parametro se configura la memoria de la instancia
+- **memory_target:** En este parametro se configura la memoria de la instancia
 
-- db_block_size: En este parametro se configura el tamaño del datablock, esta expresado en bytes
+- **db_block_size:** En este parametro se configura el tamaño del datablock, esta expresado en bytes
 
-- audit_file_dest: En este parametro se modifica la ruta del archivo de auditoria
+- **audit_file_dest:** En este parametro se modifica la ruta del archivo de auditoria
 
-- undo_tablespace: En este parametro se coloca el nombre del tablespace undo activo (ejemplo: alter system set undo_tablespace='MIUNDO')
+- **undo_tablespace:** En este parametro se coloca el nombre del tablespace undo activo (ejemplo: alter system set undo_tablespace='MIUNDO')
 
-- undo_retention: En este parametro se configura el tipo de gestion que tendra el tablespace undo, puede ser manual o auto. Solo para tecnicas muy avanzadas de configuracion se utiliza el 'manual'
+- **undo_retention:** En este parametro se configura el tipo de gestion que tendra el tablespace undo, puede ser manual o auto. Solo para tecnicas muy avanzadas de configuracion se utiliza el 'manual'
 
-- temp_undo_enabled: A partir de la version 12c sus valores son TRUE o FALSE. Si su valor es TRUE no genera redolog y permite una mejora en el uso del tablespace UNDO
+- **temp_undo_enabled:** A partir de la version 12c sus valores son TRUE o FALSE. Si su valor es TRUE no genera redolog y permite una mejora en el uso del tablespace UNDO
 
-- ddl_lock_timeout: Se configura el tiempo de espera para una sesion en espera, manda error ORA-00054
+- **ddl_lock_timeout:** Se configura el tiempo de espera para una sesion en espera, manda error ORA-00054
 
-- db_create_file_dest: En este parametro se configura la ruta especifica de los datafile para OMF
+- **db_create_file_dest:** En este parametro se configura la ruta especifica de los datafile para OMF
 
-- db_32k_cache_size: Sirve para habilitar el buffer cache para block
+- **db_32k_cache_size:** Sirve para habilitar el buffer cache para block
 
-- dispatchers:
+- **dispatchers:**
 
-- shared_servers: Especifica la cantidad de server process que desea crear cuando cuando se inicia una instancia. Se debe tener cuidado de no establecer SHARED_SERVERS demasiado alto al inicio del sistema
+- **shared_servers:** Especifica la cantidad de server process que desea crear cuando cuando se inicia una instancia. Se debe tener cuidado de no establecer SHARED_SERVERS demasiado alto al inicio del sistema
 
-- os_authent_prefix: Permite visualizar el prefijo que se le debe colocar al usuario external. Su valor es "ops$"
+- **os_authent_prefix:** Permite visualizar el prefijo que se le debe colocar al usuario external. Su valor es "ops$"
 
-- remote_os_authent: De la version 10g en adelante permite que un usuario external se conecte al sqlplus localmente, es decir, que debe estar en el S.O para poder conectarse y asi no puedan conectarse desde otros terminales. Debe estar en FALSE (valor por default)
+- **remote_os_authent:** De la version 10g en adelante permite que un usuario external se conecte al sqlplus localmente, es decir, que debe estar en el S.O para poder conectarse y asi no puedan conectarse desde otros terminales. Debe estar en FALSE (valor por default)
 
-- sec_case_sensitive_logon: A partir de la version 11g en adelante es TRUE por default, permite case sensitive en las contraseñas
+- **sec_case_sensitive_logon:** A partir de la version 11g en adelante es TRUE por default, permite case sensitive en las contraseñas
 
-- deferred_segment_creation: Su valor por default es TRUE, significa que al momento de crear la tabla, esta se crea pero no crea el segmento, es decir, Oracle crea las tablas de manera diferida, recien crea el segmento cuando se inserta el primer registro en la tabla
+- **deferred_segment_creation:** Su valor por default es TRUE, significa que al momento de crear la tabla, esta se crea pero no crea el segmento, es decir, Oracle crea las tablas de manera diferida, recien crea el segmento cuando se inserta el primer registro en la tabla
 
-- resource_limit: Desde la version 11g su valor por default es TRUE, significa que las politicas de recursos se aplicaran
+- **resource_limit:** Desde la version 11g su valor por default es TRUE, significa que las politicas de recursos se aplicaran
 
-- control_files: Muestra el listado de los control file
+- **control_files:** Muestra el listado de los control file
 
-- log_buffer: Muestra cuanto ocupa el redo log buffer
+- **log_buffer:** Muestra cuanto ocupa el redo log buffer
 
 Son 5 canales para multiplexar los redolog, aca se configuran las rutas por default para los redolog en OMF
 
-- db_create_online_log_dest_1
+- **db_create_online_log_dest_1**
 
-- db_create_online_log_dest_2
+- **db_create_online_log_dest_2**
 
-- db_create_online_log_dest_3
+- **db_create_online_log_dest_3**
 
-- db_create_online_log_dest_4
+- **db_create_online_log_dest_4**
 
-- db_create_online_log_dest_5
+- **db_create_online_log_dest_5**
 
-- fast_start_mttr_target: Parametro para configurar el tiempo de demora del instance recovery, sus valores van de 0 a 3600 segundos
+- **fast_start_mttr_target:** Parametro para configurar el tiempo de demora del instance recovery, sus valores van de 0 a 3600 segundos
 
-- log_checkpoint_timeout: Tiempo (en segundos) o rango para establecer cada cuanto ocurre un checkpoint
+- **log_checkpoint_timeout:** Tiempo (en segundos) o rango para establecer cada cuanto ocurre un checkpoint
 
-- db_recovery_file_dest: En este parametro se configura la ruta especifica para el FRA en OMF
+- **db_recovery_file_dest:** En este parametro se configura la ruta especifica para el FRA en OMF
 
-- db_recovery_file_dest_size: En este parametro se configura la ruta especifica para el FRA en OMF
+- **db_recovery_file_dest_size:** En este parametro se configura la ruta especifica para el FRA en OMF
 
-- log_archive_dest: Ruta donde manda los archivelog, se puede tener gasta 31 copias de los archivelog, 1 para el FRA y 30 para 
+- **log_archive_dest:** Ruta donde manda los archivelog, se puede tener gasta 31 copias de los archivelog, 1 para el FRA y 30 para 
 
-- log_archive_format: 
+- **log_archive_format:** 
 
-- log_archive_max_processes: Cantidad de procesos archive, esto depende de la cantidad de grupos en el redo
+- **log_archive_max_processes:** Cantidad de procesos archive, esto depende de la cantidad de grupos en el redo
 
-- control_file_record_keep_time: Tiempo (en dias) que el control file va a mantener la informacion de los backups para que el RMAN los pueda ubicar, lo recomendable es que este en 30 dias
+- **control_file_record_keep_time:** Tiempo (en dias) que el control file va a mantener la informacion de los backups para que el RMAN los pueda ubicar, lo recomendable es que este en 30 dias
 
-- pga_aggregate_target: A partir de la version 9i permite poder configurar la capacidad para el PGA y este gestione de manera automatica el tamaño de sus componentes
+- **pga_aggregate_target:** A partir de la version 9i permite poder configurar la capacidad para el PGA y este gestione de manera automatica el tamaño de sus componentes
 
-. sga_target: A partir de la version 10g permite poder configurar la capacidad para el SGA y este gestione de manera automatica el tamaño de sus componentes. No modifica los pool: redolog buffer, keep pool, recycle pool y buffer(N), aca interviene el MMAN
+. **sga_target:** A partir de la version 10g permite poder configurar la capacidad para el SGA y este gestione de manera automatica el tamaño de sus componentes. No modifica los pool: redolog buffer, keep pool, recycle pool y buffer(N), aca interviene el MMAN
 
-- memory_target: A partir de la version 11g permite controlar y gestionar el tamaño del PGA y el SGA. Este parametro no es compatible con Huge Pages
+- **memory_target:** A partir de la version 11g permite controlar y gestionar el tamaño del PGA y el SGA. Este parametro no es compatible con Huge Pages
 
-- db_file_multiblock_read_count: Permite traer n cantidad de datablocks en un barrido de lectura, es decir, si su valor es 89, trae 89 datablocks
+- **db_file_multiblock_read_count:** Permite traer n cantidad de datablocks en un barrido de lectura, es decir, si su valor es 89, trae 89 datablocks
 
-- db_keep_cache_size: Permite establecer el tamaño del keep pool
+- **db_keep_cache_size:** Permite establecer el tamaño del keep pool
 
-- db_recycle_cache_size: Permite establecer el tamaño del recycle pool
+- **db_recycle_cache_size:** Permite establecer el tamaño del recycle pool
 
-- filesystemio_options: Tiene 3 valores, async, none, setall (async: por lo bajo hace la grabacion de un insert pesado a disco y muestra el insert realizado al usuario, esto mejora el performance) (setall: hace escritura asincrona y bypasea el cache del filesystem (buffer cache del S.O)). Este parametro no se puede modificar en caliente (scope=spfile)
+- **filesystemio_options:** Tiene 3 valores, async, none, setall (async: por lo bajo hace la grabacion de un insert pesado a disco y muestra el insert realizado al usuario, esto mejora el performance) (setall: hace escritura asincrona y bypasea el cache del filesystem (buffer cache del S.O)). Este parametro no se puede modificar en caliente (scope=spfile)
 
-- session_cached_cursors: Su valor por default es 50 a partir de la version 11g, significa que va a mantener hasta 50 cursores para que encuentre rapudo el plan de ejecucion, lo recomendable es tenerlo entre 200 a 500, para poner el parametro correcto se tiene que ver el porcentaje de utilizacion del parametro session_cached_cursors, si esta en 100% de utilizacion, se tiene que aumentar su valor
+- **session_cached_cursors:** Su valor por default es 50 a partir de la version 11g, significa que va a mantener hasta 50 cursores para que encuentre rapudo el plan de ejecucion, lo recomendable es tenerlo entre 200 a 500, para poner el parametro correcto se tiene que ver el porcentaje de utilizacion del parametro session_cached_cursors, si esta en 100% de utilizacion, se tiene que aumentar su valor
 
-- cursor_sharing: Puede tener 3 valores, EXACT, SIMILAR Y FORCE (exact: significa que se hace un plan de ejecucion por cada sentencia asi solo cambie el valor un campo, por ejemplo si en el where se busca otro id, ya es una consulta distinta), (similar: omite los literal value) (force: Mantiene un plan de ejecucion de por vida, no hay mejoras ni por estadistica). Es recomendable que la aplicacion no tenga autocommit
+- **cursor_sharing:** Puede tener 3 valores, EXACT, SIMILAR Y FORCE (exact: significa que se hace un plan de ejecucion por cada sentencia asi solo cambie el valor un campo, por ejemplo si en el where se busca otro id, ya es una consulta distinta), (similar: omite los literal value) (force: Mantiene un plan de ejecucion de por vida, no hay mejoras ni por estadistica). Es recomendable que la aplicacion no tenga autocommit
 
-- statistics_level: Puede tener 3 valores: BASIC, TYPICAL y ALL (basic: oracle no trabaja las estadisticas que ejecuta por lo bajo, no se podria ver el estado de la base de datos) (ALL: hace una captura excesiva a la base de datos para poder tener mayor informacion, se usa cuando no se logra encontrar un problema en el AWR y es necesario informacion mas especifica)
+- **statistics_level:** Puede tener 3 valores: BASIC, TYPICAL y ALL (basic: oracle no trabaja las estadisticas que ejecuta por lo bajo, no se podria ver el estado de la base de datos) (ALL: hace una captura excesiva a la base de datos para poder tener mayor informacion, se usa cuando no se logra encontrar un problema en el AWR y es necesario informacion mas especifica)
 
 
 
