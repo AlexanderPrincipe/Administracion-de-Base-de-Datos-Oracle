@@ -384,7 +384,159 @@
 
 - alter database add logfile group 4 ('/u02/oradata/PRD/redo4a.log','/u02/oradata/PRD/redo4b.log') size 200M : Creacion de un nuevo miembro
 
+- alter system set db_create_online_log_dest_1='/u02/oradata/PRD': Habilitar OMF para redo log
+
+- alter database add logfile group 5: Crea le grupo 5 con 2 miembros por defecto de 100M
+
+- select current_scn from v$database: Muestra el valor actual del SCN
+
+## Instance Recovery
+
+- FRA: Guarda todas las copias del redolog
+
+- v$database: Muestra los archivelog
+
+- flash_recovery_users: Monitorea los FRA
+
+- Ventajas del modo archive: Recupera la base de datos en la ultima transaccion commiteada, permite sacar backup online
+
+- Desventajas del modo archive: Se consume espacio en disco
+
+
+## Backup
+
+- Dos formatos de backup: backup image (similar a User managed backup) y backup set (RMAN)
+
+## CASO1 Backup de un tablespace: 
+
+- select tablespace_name from dba_tablespaces;
+
+- select file_namefrom dba_data_files where tablespace_name = 'USERS'
+
+- alter tablespace USERS begin backup: Se lanza un checkpoint process, es en caliente y solo funciona si esta en modo archive
+
+- cp /u02/oradata/PRD/users191.dbf /u03/users01.bk: Copiar el archivo
+
+- alter tablespace USERS end backup: Termina el proceso de backup
+
+## CASO2 Backup de toda la base de datos: 
+
+- alter database begin backup: Pone en una modalidad que todos los datafile pueden ser copiados
+
+- zip -r /u03/bd.bk.zip /u02/oradata/PRD: Se copia toda la base de datos
+
+- alter database end backup: Termina el proceso de backup
+
+## CASO3 Backup de un tablespace que esta en modo archivelog: 
+
+- shutdown immediate
+
+- alter tablespace USERS begin backup: Se lanza un checkpoint process, es en caliente y solo funciona si esta en modo archive
+
+- cp /u02/oradata/PRD/users191.dbf /u03/users01.bk: Copiar el archivo
+
+- alter tablespace USERS end backup: Termina el proceso de backup
+
+- startup open
+
+# CASO4 Backup de una base de datos que esta en modo archivelog:
+
+- shutdown immediate
+
+- alter database begin backup: Pone en una modalidad que todos los datafile pueden ser copiados
+
+- zip -r /u03/bd.bk.zip /u02/oradata/PRD: Se copia toda la base de datos
+
+- alter database end backup: Termina el proceso de backup 
+
+- startup open
+
+# CASO5 Backup tablespace con RMAN que esta en modo archivelog image
+
+- backup as copy tablespace USERS: Backup de un tablespace, 'as copy' significa que Oracle sacara un backup tipo image, backup sin ruta lo manda al FRA
+
+- backup as copy tablespace USERS format '/tmp/users%U.bk': Backup con ruta
+
+# CASO6 Backup del tablespace con RMAN que esta en modo archivelog image
+
+- backup as copy database: Backup de una base de datos, backup sin ruta, si se quiere agregar ruta se le agrega format como en el Caso5 y la ruta
+
+# CASO7 Backup del tablespace con RMAN en modo archivelogFile, BACKUPSET
+
+- backup as backupset tablespace USERS: Backup de un tablespace, pesa menos sacando el backupset
+
+- backup tablespace USERS: Por defecto los backup del RMAN es un backupset
+
+# CASO8 Backup de BD con RMAN en modo archivelog de tipo Backupset
+
+- backup as compressed backupset database: Lo comprime con compressed
+
+# CASO9 Backup de BD + archivelog con RMAN y de tipo backupset
+
+- backup database plus archivelog delete input: 
+
+# CASO10 Backup + archivelog files con RMAN y Backupset y ademas eliminando los archivelog
+
+- backup as compressed backupset tablespace USERS plus archivelog delete input:
+
+# CASO11 Backup archivelogs files
+
+- backup archivelog all delete input: Saca backup solo de los archivelog
+
+# CASO12 Backup del controlfile
+
+- backup current controlfile: Saca el backup del control file
+
+# CASO13 Backup del SPFILE
+
+- backup spfile
+
+# CASO14 Listar los backups
+
+- list backup: Listado de los backups
+
+- list backup summary
+
+# CASO15 Borrar los backups
+
+- delete backup: Borra los backupset
+
+- delete copy: Borra los backup de tipo image
+
+# CASO16 Revalidar los backup
+
+- crosscheck backup:
+
+# CASO17 Eliminar los backup expirados
+
+- delete expired backup: Borra los backup expirados
+
+# CASO18 Revisar la configuracion de RMAN, la configuracion de guarda en el contro file
+
+- show all: Muestra la configuracion que tiene el RMAN
+
+# CASO19 Cambiar un parametro de RMAN
+
 - 
+
+# CASO20 Politica de retencion a 15 dias
+
+- configure retention policy to recovery window of 15 days: Cambia la duracion del backup, luego de 15 dias se volvera obsoleto
+
+- desc v$flash_recovery_area_usage: Ver el espacio del FRA
+
+# CASO21 Backup a un Datafile
+
+- backup datafile '/u02/oradata/PRD/users01.dbf' format '/u03/bk_users%U.bk';
+
+# 
+
+- Backup obsoleto: Si un backup tiene 1 semana de antiguedad se vuelve obsoleto, es configurable
+
+- Archivelog: Guarda la copia de un redo en el tiempo 
+
+
+
 
 
 
