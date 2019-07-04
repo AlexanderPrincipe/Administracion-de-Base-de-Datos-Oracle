@@ -555,6 +555,31 @@
 
 - backup incremental level 1 acumulative database:
 
+![screenshot1](https://user-images.githubusercontent.com/31213239/60689810-2892e580-9e87-11e9-90e3-0ca8c1888431.png)
+
+# RESTORE
+
+- alter tablespace USERS offline immediate: Pone en modo offline el tablespace y hace un checkpoint por lo bajo
+
+- restore datafile '/u02/oradata/PRD/users01.dbf': Operacion de restore
+
+- recover datafile '/u02/oradata/PRD/users01.dbf': Recover
+
+- alter database USERS online: Poner el tablespace online
+
+# Otra manera de hacer restore
+
+- alter tablespace USERS offline immediate: Modo offline
+
+- restore tablespace USERS: Restore
+
+- recover tablespace USERS: Recover
+
+- alter tablespace USERS online: Modo online
+
+
+
+
 
 
 ## Parametros
