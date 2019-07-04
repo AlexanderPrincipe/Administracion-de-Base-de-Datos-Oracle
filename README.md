@@ -535,8 +535,25 @@
 
 - Archivelog: Guarda la copia de un redo en el tiempo 
 
+- Redo log, Password file, PFILE y el TEMP no puede ser backupeados por el RMAN
 
+- backup whole: 100% de los datafiles
 
+- backup full: datablocks escritos (backupset)
+
+- Restore: Agarra los backup y los deja en el servidor
+
+- RPO: Maximo tiempo aceptado que se puede perder
+
+- RTP: Tiempo que se demora en subir la BD
+
+- alter system set control_file_record_keep_time = 16: Tiempo de duracion del bk, se recomienda 31 dias en produccion
+
+- backup incremental level 0 database: Backup total de la bd
+
+- backup incremental level 1 database: Me llevo el diferencial desde el backup 0 hasta ahora
+
+- backup incremental level 1 acumulative database:
 
 
 
