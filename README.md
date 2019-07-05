@@ -224,7 +224,7 @@
 
 - los DDL realizan bloqueos exclusivos (bloqueos en la tabla), ademas, los indices en la tabla quedan dañados
 
-- alter index IDX_TABLA rebuild: Reconstruir indices dañados
+- **alter index IDX_TABLA rebuild:** Reconstruir indices dañados
 
 ## Pasos de desfragmentacion
 
@@ -379,25 +379,25 @@
 
 ![Captura de pantalla de 2019-06-29 19-26-48](https://user-images.githubusercontent.com/31213239/60390794-366df280-9aa4-11e9-9825-918fff970a63.png)
 
-- alter system switch logfile: Forzar un switch
+- **alter system switch logfile:** Forzar un switch
 
-- select GROUP#, SEQUENCE#, BYTES, STATUS from v$log: Ver cual grupo esta activo, actual e inactivo
+- **select GROUP#, SEQUENCE#, BYTES, STATUS from v$log:** Ver cual grupo esta activo, actual e inactivo
 
-- alter database add logfile group 4 ('/u02/oradata/PRD/redo4a.log','/u02/oradata/PRD/redo4b.log') size 200M : Creacion de un nuevo miembro
+- **alter database add logfile group 4 ('/u02/oradata/PRD/redo4a.log','/u02/oradata/PRD/redo4b.log') size 200M :** Creacion de un nuevo miembro
 
-- alter system set db_create_online_log_dest_1='/u02/oradata/PRD': Habilitar OMF para redo log
+- **alter system set db_create_online_log_dest_1='/u02/oradata/PRD':** Habilitar OMF para redo log
 
-- alter database add logfile group 5: Crea le grupo 5 con 2 miembros por defecto de 100M
+- **alter database add logfile group 5:** Crea le grupo 5 con 2 miembros por defecto de 100M
 
-- select current_scn from v$database: Muestra el valor actual del SCN
+- **select current_scn from v$database:** Muestra el valor actual del SCN
 
 ## Instance Recovery
 
 - FRA: Guarda todas las copias del redolog
 
-- v$database: Muestra los archivelog
+- **v$database:** Muestra los archivelog
 
-- flash_recovery_users: Monitorea los FRA
+- **flash_recovery_users:** Monitorea los FRA
 
 - Ventajas del modo archive: Recupera la base de datos en la ultima transaccion commiteada, permite sacar backup online
 
@@ -410,35 +410,35 @@
 
 ## CASO1 Backup de un tablespace: 
 
-- select tablespace_name from dba_tablespaces;
+- **select tablespace_name from dba_tablespaces:**
 
-- select file_namefrom dba_data_files where tablespace_name = 'USERS'
+- **select file_name from dba_data_files where tablespace_name = 'USERS'**
 
-- alter tablespace USERS begin backup: Se lanza un checkpoint process, es en caliente y solo funciona si esta en modo archive
+- **alter tablespace USERS begin backup:** Se lanza un checkpoint process, es en caliente y solo funciona si esta en modo archive
 
-- cp /u02/oradata/PRD/users191.dbf /u03/users01.bk: Copiar el archivo
+- **cp /u02/oradata/PRD/users191.dbf /u03/users01.bk:** Copiar el archivo
 
-- alter tablespace USERS end backup: Termina el proceso de backup
+- **alter tablespace USERS end backup:** Termina el proceso de backup
 
 ## CASO2 Backup de toda la base de datos: 
 
-- alter database begin backup: Pone en una modalidad que todos los datafile pueden ser copiados
+- **alter database begin backup:** Pone en una modalidad que todos los datafile pueden ser copiados
 
-- zip -r /u03/bd.bk.zip /u02/oradata/PRD: Se copia toda la base de datos
+- **zip -r /u03/bd.bk.zip /u02/oradata/PRD:** Se copia toda la base de datos
 
-- alter database end backup: Termina el proceso de backup
+- **alter database end backup:** Termina el proceso de backup
 
 ## CASO3 Backup de un tablespace que esta en modo archivelog: 
 
-- shutdown immediate
+- **shutdown immediate:**
 
-- alter tablespace USERS begin backup: Se lanza un checkpoint process, es en caliente y solo funciona si esta en modo archive
+- **alter tablespace USERS begin backup:** Se lanza un checkpoint process, es en caliente y solo funciona si esta en modo archive
 
-- cp /u02/oradata/PRD/users191.dbf /u03/users01.bk: Copiar el archivo
+- **cp /u02/oradata/PRD/users191.dbf /u03/users01.bk:** Copiar el archivo
 
-- alter tablespace USERS end backup: Termina el proceso de backup
+- **alter tablespace USERS end backup:** Termina el proceso de backup
 
-- startup open
+- **startup open**
 
 ## CASO4 Backup de una base de datos que esta en modo archivelog:
 
@@ -677,17 +677,3 @@ Son 5 canales para multiplexar los redolog, aca se configuran las rutas por defa
 - **cursor_sharing:** Puede tener 3 valores, EXACT, SIMILAR Y FORCE (exact: significa que se hace un plan de ejecucion por cada sentencia asi solo cambie el valor un campo, por ejemplo si en el where se busca otro id, ya es una consulta distinta), (similar: omite los literal value) (force: Mantiene un plan de ejecucion de por vida, no hay mejoras ni por estadistica). Es recomendable que la aplicacion no tenga autocommit
 
 - **statistics_level:** Puede tener 3 valores: BASIC, TYPICAL y ALL (basic: oracle no trabaja las estadisticas que ejecuta por lo bajo, no se podria ver el estado de la base de datos) (ALL: hace una captura excesiva a la base de datos para poder tener mayor informacion, se usa cuando no se logra encontrar un problema en el AWR y es necesario informacion mas especifica)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
