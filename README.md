@@ -403,7 +403,7 @@
 - Desventajas del modo archive: Se consume espacio en disco
 
 
-## Backup
+# Backup
 
 - Dos formatos de backup: backup image (similar a User managed backup) y backup set (RMAN)
 
@@ -439,7 +439,7 @@
 
 - startup open
 
-# CASO4 Backup de una base de datos que esta en modo archivelog:
+## CASO4 Backup de una base de datos que esta en modo archivelog:
 
 - shutdown immediate
 
@@ -451,85 +451,85 @@
 
 - startup open
 
-# CASO5 Backup tablespace con RMAN que esta en modo archivelog image
+## CASO5 Backup tablespace con RMAN que esta en modo archivelog image
 
 - backup as copy tablespace USERS: Backup de un tablespace, 'as copy' significa que Oracle sacara un backup tipo image, backup sin ruta lo manda al FRA
 
 - backup as copy tablespace USERS format '/tmp/users%U.bk': Backup con ruta
 
-# CASO6 Backup del tablespace con RMAN que esta en modo archivelog image
+## CASO6 Backup del tablespace con RMAN que esta en modo archivelog image
 
 - backup as copy database: Backup de una base de datos, backup sin ruta, si se quiere agregar ruta se le agrega format como en el Caso5 y la ruta
 
-# CASO7 Backup del tablespace con RMAN en modo archivelogFile, BACKUPSET
+## CASO7 Backup del tablespace con RMAN en modo archivelogFile, BACKUPSET
 
 - backup as backupset tablespace USERS: Backup de un tablespace, pesa menos sacando el backupset
 
 - backup tablespace USERS: Por defecto los backup del RMAN es un backupset
 
-# CASO8 Backup de BD con RMAN en modo archivelog de tipo Backupset
+## CASO8 Backup de BD con RMAN en modo archivelog de tipo Backupset
 
 - backup as compressed backupset database: Lo comprime con compressed
 
-# CASO9 Backup de BD + archivelog con RMAN y de tipo backupset
+## CASO9 Backup de BD + archivelog con RMAN y de tipo backupset
 
 - backup database plus archivelog delete input: 
 
-# CASO10 Backup + archivelog files con RMAN y Backupset y ademas eliminando los archivelog
+## CASO10 Backup + archivelog files con RMAN y Backupset y ademas eliminando los archivelog
 
 - backup as compressed backupset tablespace USERS plus archivelog delete input:
 
-# CASO11 Backup archivelogs files
+## CASO11 Backup archivelogs files
 
 - backup archivelog all delete input: Saca backup solo de los archivelog
 
-# CASO12 Backup del controlfile
+## CASO12 Backup del controlfile
 
 - backup current controlfile: Saca el backup del control file
 
-# CASO13 Backup del SPFILE
+## CASO13 Backup del SPFILE
 
 - backup spfile
 
-# CASO14 Listar los backups
+## CASO14 Listar los backups
 
 - list backup: Listado de los backups
 
 - list backup summary
 
-# CASO15 Borrar los backups
+## CASO15 Borrar los backups
 
 - delete backup: Borra los backupset
 
 - delete copy: Borra los backup de tipo image
 
-# CASO16 Revalidar los backup
+## CASO16 Revalidar los backup
 
 - crosscheck backup:
 
-# CASO17 Eliminar los backup expirados
+## CASO17 Eliminar los backup expirados
 
 - delete expired backup: Borra los backup expirados
 
-# CASO18 Revisar la configuracion de RMAN, la configuracion de guarda en el contro file
+## CASO18 Revisar la configuracion de RMAN, la configuracion de guarda en el contro file
 
 - show all: Muestra la configuracion que tiene el RMAN
 
-# CASO19 Cambiar un parametro de RMAN
+## CASO19 Cambiar un parametro de RMAN
 
 - 
 
-# CASO20 Politica de retencion a 15 dias
+## CASO20 Politica de retencion a 15 dias
 
 - configure retention policy to recovery window of 15 days: Cambia la duracion del backup, luego de 15 dias se volvera obsoleto
 
 - desc v$flash_recovery_area_usage: Ver el espacio del FRA
 
-# CASO21 Backup a un Datafile
+## CASO21 Backup a un Datafile
 
 - backup datafile '/u02/oradata/PRD/users01.dbf' format '/u03/bk_users%U.bk';
 
-# 
+## 
 
 - Backup obsoleto: Si un backup tiene 1 semana de antiguedad se vuelve obsoleto, es configurable
 
@@ -557,7 +557,7 @@
 
 ![screenshot1](https://user-images.githubusercontent.com/31213239/60689810-2892e580-9e87-11e9-90e3-0ca8c1888431.png)
 
-# RESTORE
+## RESTORE
 
 - alter tablespace USERS offline immediate: Pone en modo offline el tablespace y hace un checkpoint por lo bajo
 
@@ -567,7 +567,7 @@
 
 - alter database USERS online: Poner el tablespace online
 
-# Otra manera de hacer restore
+## Otra manera de hacer restore
 
 - alter tablespace USERS offline immediate: Modo offline
 
