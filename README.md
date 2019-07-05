@@ -1,5 +1,6 @@
-# Administracion-de-base-de-datos-Oracle
+# Oracle database administration
 
+## Book: Sybex_OCA_Oracle_DB_12c
 
 ## Conceptos
 
