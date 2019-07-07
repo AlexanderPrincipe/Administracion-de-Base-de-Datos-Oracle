@@ -532,56 +532,51 @@
 
 ## 
 
-- Backup obsoleto: Si un backup tiene 1 semana de antiguedad se vuelve obsoleto, es configurable
+- **Backup obsoleto:** Si un backup tiene 1 semana de antiguedad se vuelve obsoleto, es configurable
 
-- Archivelog: Guarda la copia de un redo en el tiempo 
+- **Archivelog:** Guarda la copia de un redo en el tiempo 
 
 - Redo log, Password file, PFILE y el TEMP no puede ser backupeados por el RMAN
 
-- backup whole: 100% de los datafiles
+- **backup whole:** 100% de los datafiles
 
-- backup full: datablocks escritos (backupset)
+- **backup full:** datablocks escritos (backupset)
 
-- Restore: Agarra los backup y los deja en el servidor
+- **Restore:** Agarra los backup y los deja en el servidor
 
-- RPO: Maximo tiempo aceptado que se puede perder
+- **RPO:** Maximo tiempo aceptado que se puede perder
 
-- RTP: Tiempo que se demora en subir la BD
+- **RTO:** Tiempo que se demora en subir la BD
 
-- alter system set control_file_record_keep_time = 16: Tiempo de duracion del bk, se recomienda 31 dias en produccion
+- **alter system set control_file_record_keep_time = 16:** Tiempo de duracion del bk, se recomienda 31 dias en produccion
 
-- backup incremental level 0 database: Backup total de la bd
+- **backup incremental level 0 database:** Backup total de la bd
 
-- backup incremental level 1 database: Me llevo el diferencial desde el backup 0 hasta ahora
+- **backup incremental level 1 database:** Me llevo el diferencial desde el backup 0 hasta ahora
 
-- backup incremental level 1 acumulative database:
+- **backup incremental level 1 acumulative database:**
 
 ![screenshot1](https://user-images.githubusercontent.com/31213239/60689810-2892e580-9e87-11e9-90e3-0ca8c1888431.png)
 
 ## RESTORE
 
-- alter tablespace USERS offline immediate: Pone en modo offline el tablespace y hace un checkpoint por lo bajo
+- **alter tablespace USERS offline immediate:** Pone en modo offline el tablespace y hace un checkpoint por lo bajo
 
-- restore datafile '/u02/oradata/PRD/users01.dbf': Operacion de restore
+- **restore datafile '/u02/oradata/PRD/users01.dbf':** Operacion de restore
 
-- recover datafile '/u02/oradata/PRD/users01.dbf': Recover
+- **recover datafile '/u02/oradata/PRD/users01.dbf':** Recover
 
-- alter database USERS online: Poner el tablespace online
+- **alter database USERS online:** Poner el tablespace online
 
 ## Otra manera de hacer restore
 
-- alter tablespace USERS offline immediate: Modo offline
+- **alter tablespace USERS offline immediate:** Modo offline
 
-- restore tablespace USERS: Restore
+- **restore tablespace USERS:** Restore
 
-- recover tablespace USERS: Recover
+- **recover tablespace USERS:** Recover
 
-- alter tablespace USERS online: Modo online
-
-
-
-
-
+- **alter tablespace USERS online:** Modo online
 
 ## Parametros
 
