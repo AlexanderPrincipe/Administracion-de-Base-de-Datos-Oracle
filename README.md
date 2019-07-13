@@ -556,6 +556,11 @@
 
 - **backup incremental level 1 acumulative database:**
 
+
+## Multitenant
+
+- 
+
 ![screenshot1](https://user-images.githubusercontent.com/31213239/60689810-2892e580-9e87-11e9-90e3-0ca8c1888431.png)
 
 ## RESTORE
