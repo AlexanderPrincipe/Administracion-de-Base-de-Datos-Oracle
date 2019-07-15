@@ -165,7 +165,7 @@
     9. dba_free_space: para saber el espacio libre de los tablespaces.
     10. dba_temp_files: para saber el espacio reservado para la tablespace TEMP.
     11. v$tempstat: estadísticas de operaciones de los tempfiles.
-    12. v$tempfile: devuelve información de los tempfile.
+    12. v$tempfile: devuelve información de los tempfile. 
     13. v$datafile: devuelve información de los datafiles.
     14. dba_waiters: para ver las sesiones bloqueadas.
     15. dba_blockers: aquel responsable que está bloqueando a alguien haciendo que quede en espera.
