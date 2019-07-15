@@ -153,6 +153,76 @@
 
 - desc **v$log:** Muestra los grupos de redo log creados
 
+*******************************************************************************************************
+    1. v$instance: información de la instancia.
+    2. v$database: información de la parte física. Permite ver el valor actual de SCN.
+    3. v$session: información detallada de cada sesión de DB conectada.
+    4. dba_users: lista de los usuarios creados.
+    5. dba_tablespaces: contiene información de los tablespaces. (Su tabla es TS$)
+    6. database_properties: todas las propiedades de la DB.
+    7. dba_segments: devuelve todos los segmentos de la DB. También, ve la capacidad de los tablespaces.
+    8. dba_data_files: información de todos los datafiles.
+    9. dba_free_space: para saber el espacio libre de los tablespaces.
+    10. dba_temp_files: para saber el espacio reservado para la tablespace TEMP.
+    11. v$tempstat: estadísticas de operaciones de los tempfiles.
+    12. v$tempfile: devuelve información de los tempfile.
+    13. v$datafile: devuelve información de los datafiles.
+    14. dba_waiters: para ver las sesiones bloqueadas.
+    15. dba_blockers: aquel responsable que está bloqueando a alguien haciendo que quede en espera.
+    16. v$locked_object: devuelve qué objeto está mapeado a qué bloqueo.
+    17. dba_objects: devuelve la información de todos los objetos creados.
+    18. v$sql: devuelve todos los query que todavía están en el library caché.
+    19. dba_resumable: para ver las sesiones que están en espera por falta de espacio en disco (ejemplo: un insert pesado)
+    20. v$dispatcher: información de los dispatcher (en conexiones compartidas)
+    21. v$shared_server: información de los shared server (en conexiones compartidas)
+    22. dba_cpool_info: información del pool de conexiones. Todos sus campos pueden serm modificados.
+    23. dba_tab_privs: devuelve los privilegios de objeto otorgados a un usuario.
+    24. dba_sys_privs: devuelve los privilegios de sistema otorgados a un usuario.
+    25. dictionary: devuelve todas las vistas dba y v$
+    26. dba_synonyms: devuelve todos los synonyms de la DB.
+    27. system_privilege_map: devuelve todos los privilegios del sistema.
+    28. dba_roles: muestra todos los roles existentes en la DB.
+    29. dba_role_privs: devuelve los roles por usuario.
+    30. session_privs: los privilegios activados de la sesión.
+    31. dba_profiles: permite visualizar los atributos de cada perfil. Campo “profile” contiene el nombre del perfil y el “Resource_Name” contiene los atributos.
+
+Lo ejecuta SYS o SYSTEM (las siguientes 4 vistas):
+
+    32. dba_priv_captures: devuelve las políticas de control sobre el uso de privilegios que han sido creadas.
+    33. dba_used_sysprivs: devuelve los privilegios de sistema que has utilizado.
+    34. dba_used_objprivs:devuelve los privilegios de objeto que has utilizado.
+    35. dba_unused_privs: devuelve los privilegios que aún no has utilizado.
+
+    36. v$pwfile_users:devuelve la lista de usuarios que tienen los privilegios especiales (sysdba, sysoper y sysbackup)
+    37. dba_hist_active_sess_history: devuelve el contenido del historial de la sesión activa.
+    38. v$parameter: lista todos los parámetros.
+    39. v$log: para ver los grupos creados de redolog.
+    40. v$logfile: para ver la estructura de los grupos (cuántos miembros tiene cada grupo.
+    41. v$version: devuelve la versión de la DB.
+    42. v$flash_recovery_area_usage: devuelve el % usado por cada tipo de información almacenada en el FRA.
+    43. v$rman_backup_job_details: para ver la información de los backups.
+    44. v$archive_log: devuelve la cantidad de archive log generados en el tiempo (muestra la secuencia y hora)
+    45. dba_hist_wr_control: información sobre la configuración de los snapshots para el AWR.
+    46. dba_his_snapshot: muestra la lista de los snapshots generados.
+    47. v$sga_target_advice: muestra la información de “SGA Target Advisory” del AWR.
+    48. v$memory_target_advice: devuelve información sobre cómo se debe dimensionar el parámetro MEMORY_TARGET en función del tamaño actual y las métricas de satisfacción.
+    49. v$pgastat: devuelve estadísticas con respecto al PGA. El “over allocation count” debe estar en 0 (sobreescritura por espacio). El “cache hit percentage” debe estar lo más cercano a 100.
+    50. v$session_wait: devuleve la info sobre el evento del por qué una sesión está esperando. Es decir, los eventos de espera de cada sesión.
+    51. dba_indexes: Para revisar la info de los index
+    52. v$diag_info: información sobre el ADR
+    53. dba_directories: devuelve info de todos los objetos directorios
+    54. dba_datapump_jobs: devuelve la info de los job de los export o import datapump realizados. Toda esa info lo saca de las master tables creadas.
+    55. dba_audit_trail: esta vista permite visualizar los reportes de auditoría.
+    56. dba_fga_audit_trail: esta vista permite visualizar los reportes de auditoría del FGA.
+    57. v$option: devuelve la lista de todas las opciones de base de datos.
+    58. audit_unified_policies: devuelve las configuraciones de las políticas de unified
+    59. unified_audit_trail: esta vista permite visualizar los reportes de auditoría unificada.
+    60. dba_obj_audit_opts: para ver las directivas de seguridad asignadas a un objeto.
+    61. dba_sys_audit_opts: para ver las directivas de seguridad asignadas al sistema.
+    62. v$pdbs: devuelve todos los PDB creados en la BD, menos el root.
+    63. v$containers: devuelve todos los PDB creados en la BD incluido el root.
+    64. v$services: para listar todos los servicios.
+
 
 ## Comandos
 
