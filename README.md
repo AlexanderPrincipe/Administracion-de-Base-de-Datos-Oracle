@@ -512,15 +512,15 @@ Lo ejecuta SYS o SYSTEM (las siguientes 4 vistas):
 
 ## CASO4 Backup de una base de datos que esta en modo archivelog:
 
-- shutdown immediate
+- **shutdown immediate**
 
-- alter database begin backup: Pone en una modalidad que todos los datafile pueden ser copiados
+- **alter database begin backup:** Pone en una modalidad que todos los datafile pueden ser copiados
 
-- zip -r /u03/bd.bk.zip /u02/oradata/PRD: Se copia toda la base de datos
+- **zip -r /u03/bd.bk.zip /u02/oradata/PRD:** Se copia toda la base de datos
 
-- alter database end backup: Termina el proceso de backup 
+- **alter database end backup:** Termina el proceso de backup 
 
-- startup open
+- **startup open**
 
 ## CASO5 Backup tablespace con RMAN que esta en modo archivelog image
 
