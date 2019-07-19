@@ -435,9 +435,9 @@ Lo ejecuta SYS o SYSTEM (las siguientes 4 vistas):
 
 ## Profile
 
-- alter user ULIMA profile PERFIL_ULIMA: Asignar un perfil al usuario ULIMA
+- **alter user ULIMA profile PERFIL_ULIMA:** Asignar un perfil al usuario ULIMA
 
-- sysbackup: Es un privilegio para poder sacar backup
+- **sysbackup:** Es un privilegio para poder sacar backup
 
 ## Recuperacion
 
@@ -524,9 +524,9 @@ Lo ejecuta SYS o SYSTEM (las siguientes 4 vistas):
 
 ## CASO5 Backup tablespace con RMAN que esta en modo archivelog image
 
-- backup as copy tablespace USERS: Backup de un tablespace, 'as copy' significa que Oracle sacara un backup tipo image, backup sin ruta lo manda al FRA
+- **backup as copy tablespace USERS:** Backup de un tablespace, 'as copy' significa que Oracle sacara un backup tipo image, backup sin ruta lo manda al FRA
 
-- backup as copy tablespace USERS format '/tmp/users%U.bk': Backup con ruta
+- **backup as copy tablespace USERS format '/tmp/users%U.bk':** Backup con ruta
 
 ## CASO6 Backup del tablespace con RMAN que esta en modo archivelog image
 
