@@ -1,6 +1,6 @@
 # Oracle database administration
 
-## TEST SQL Fundamentals: https://www.multisoftsystems.com/assessments/oracle-foundation-practice-test
+# TEST SQL Fundamentals: https://www.multisoftsystems.com/assessments/oracle-foundation-practice-test
 
 ## Book: Sybex_OCA_Oracle_DB_12c
 
